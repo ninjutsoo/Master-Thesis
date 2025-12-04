@@ -1,0 +1,14 @@
+\section{Preliminaries} 
+\label{chap:pre}
+
+\subsection{ICL Formulation}
+
+Formally, ICL is characterized as a problem involving the conditional generation of text \cite{liu2021makes}, where an LLM $\mathcal{M}$ is employed to generate response $y_Q$ given an optimal task instruction $I$, a demo set $C$, and an input query $x_Q$. $I$ specifies the downstream task that $\mathcal{M}$ should perform, e.g., ``Choose sentiment from positive or negative'' used in our sentiment generation task. $C$ consists of $N$ (e.g., 8) concatenated data-label pairs following a specific template $S$, formally: $C = [S(x_1, y_1);\  \cdots; \ S(x_N, y_N)]$, `;' here denotes the concatenation operator. Thus, given the input prompt as $p = [I;\ C;\ S(x_Q,\_)]$, $\mathcal{M}$ generates the response as $\hat{y}_Q = \mathcal{M}(p)$. $S(x_Q, \_)$ here means using the same template as the demos but with the label empty. 
+
+\subsection{Adversarial Attack on LLMs}
+
+In typical text-based adversarial attacks, the attackers manipulate the input $x$ with the goal of misleading the model to produce inaccurate output or bypass safety guardrails \cite{zou2023universal,maus2023black}. Specifically, given the input-output pair $(x,y)$, the attackers aim to learn the adversarial perturbation $\delta$ adding to $x$ by maximizing the model’s objective function but without misleading humans by bounding the perturbation within the “perceptual” region $\Delta$. The objective function of the attacking process thus can be formulated as: 
+\begin{equation}
+    \underset{\delta \in \Delta}{\mathrm{max}}\mathcal{L}(\mathcal{M}(x_Q + \delta), y_Q),
+\end{equation}
+$\mathcal{L}$ here denotes the task-specific loss function, for instance, cross-entropy loss for classification tasks. 

@@ -1,0 +1,102 @@
+\section{The Threat Model}
+\label{chap:threat}
+
+\subsection{ICL Hijacking Attack}
+
+ICL consists of an instruction $I$, a demo set $C$, and an input query $x_Q$, providing more potential attack vectors compared to the conventional text-based adversarial attacks. This work focuses on manipulating $C$ without changing $I$ and $x_Q$. Recently, \cite{wang2023adversarial} applied character-level perturbation techniques (e.g., TextAttack \cite{morris2020textattack} and TextBugger \cite{li2018textbugger}), such as character insertion, character deletion, neighboring character swap, and character substitution, to reverse the output.
+
+Our hijacking attack learns the adversarial suffix tokens to the in-context demos to manipulate LLMs' output via a new greedy gradient-based prompt injection algorithm. Given a clean demo set: 
+\begin{equation}
+    C = [S(x_1, y_1);\  \cdots; \ S(x_N, y_N)],
+\end{equation}
+our hijacking attack automatically produces an adversarial suffix for each demo in $c$, formally: 
+\begin{equation}
+    C^\prime = [S(x_1 + \delta_1, y_1);\  \cdots; \ S(x_N + \delta_N, y_N)], 
+\end{equation}
+where $C^\prime$ denotes the perturbed demo set. To make it clear, the adversarial suffixes appended to each demo as perturbations are different, respectively. In this case, the attack or perturbation budget refers to the number of tokens in each adversarial suffix. 
+
+As a result, our hijacking attack induces $\mathcal{M}$ to generate an unwanted target output $y_T$ via appending adversarial suffix tokens on the in-context demos as $y_T = \mathcal{M}(p^\prime)$. In other words, $\mathcal{M}$ generates the same or different responses for the clean and perturbed prompts depending on the True or False of $\mathcal{M}(p) = y_T$:
+\[
+  %  f(x)= 
+\begin{cases}
+    \mathcal{M}(p) = \mathcal{M}(p^\prime),     & \text{True},\\
+    \mathcal{M}(p) \neq \mathcal{M}(p^\prime),  & \text{False},
+\end{cases}
+\]
+where $p = [I;\ C;\ S(x_Q,\_)]$ and $p^\prime = [I;\ C^\prime;\ S(x_Q,\_)]$, respectively.
+
+%\begin{equation}
+%    \mathcal{M}(\mathcal{V}(y_j)|p) \neq \mathcal{M}(\mathcal{V}(y_j)|p^\prime),
+%\end{equation}
+%where $p = [I;\ C;\ S(x_Q,\_)]$ and $p^\prime = [I;\ C^\prime;\ S(x_Q,\_)]$, respectively.
+
+\subsection{Hijacking Attack Objective}
+
+We express the goal of the hijacking attack as a formal objective function. Let us consider the LLM $\mathcal{M}$ as a function that maps a sequence of tokens $x_{1:n}$, with $x \in \{1, \cdots, V\}$ where $V$ denote the vocabulary size, namely, the number of tokens, to a probability distribution over the next token $x_{n+1}$. Specifically, $\mathcal{P}(x_{n+1}|x_{1:n})$ denotes the probability that $x_{n+1}$ is the next token given the previous tokens $x_{1:n}$. In more detail, we formulate $x_{1:n}$ as $[I;\ C;\ S(x_Q,\_)]$ and $x_{n+1}$ as $\hat{y}_Q$ in the context of an ICL task, respectively. 
+
+Using the notations defined earlier, the hijacking attack objective we want to optimize is simply the negative log probability of the target token $x_{n+1}$. The generated target output ${y}_T$ is different from the ground truth label $y_Q$ for the training query $(x_Q,y_Q)$. Formally:
+\begin{equation}
+    \label{eq:loss}
+    \mathcal{L}(x_Q) = -\log \mathcal{P}(\mathcal{M}(y_T|p^\prime)),
+\end{equation}
+where $y_T \neq y_Q$, demonstrating the attack hijacks $\mathcal{M}$ to generate the target output. $p^\prime$ denotes the perturbed prompt as: $p^\prime = [I;\ C^\prime;\ S(x_Q,\_)]$. 
+In summary, the problem of optimizing the adversarial suffix tokens can be formulated as the following optimization objective:
+\begin{equation}
+\label{eq:optim}
+     \underset{\delta_i\in\{1, \cdots, V\}^{|N|}}{\mathrm{minimize}}\mathcal{L}(x_Q),
+\end{equation}
+where $i$ denotes the indices of the demos and $N$ is the number of demos in the perturbed demos set $C^\prime$, respectively. 
+
+\subsection{Greedy Gradient-guided Injection}
+
+A primary challenge in optimizing Eq. \ref{eq:optim} is optimizing over a discrete set of possible token values. While there are some methods for discrete optimization, prior work \cite{carlini2023aligned} has shown that those effective strategies often struggle to reliably attack the aligned LLMs. 
+
+Motivated by prior works \cite{shin2020autoprompt,zou2023universal,wen2024hard}, we propose a simple yet effective algorithm for LLMs hijacking attacks, called greedy gradient-guided injection (GGI) algorithm (Algorithm \ref{alg}). The key idea comes from greedy coordinate descent: if we could evaluate all possible suffix token injections, we could substitute the tokens that maximize the adversarial loss reduction. Since exhaustively evaluating all tokens is infeasible due to the large candidate vocabulary size, we instead leverage gradients with respect to the suffix indicators to find promising candidate tokens for each position. We then evaluate all of these candidate injections with explicit forward passes to find the one that decreases the loss the most. This allows an efficient approximation of the true greedy selection. We can optimize the discrete adversarial suffixes by iteratively injecting the best tokens.  
+
+We compute the linearized approximation of replacing the demo $x_i$ in $C$ by evaluating the gradient $\nabla_{\mathbf{e}_{x_i^j}} \mathcal{L}(x_Q) \in \mathbb{R}^{|V|}$, where $\mathbf{e}_{x_i^j}$ denotes the vector representing the current value of the $j$-th adversarial suffix token. Note that because LLMs typically form embeddings for each token, they can be written as functions of $\mathbf{e}_{x_i^j}$, and thus we can immediately take the gradient with respect to this quantity \cite{ebrahimi2017hotflip,shin2020autoprompt}. 
+
+The key aspects of our GGI algorithm (Algorithm \ref{alg}) are: firstly, it uses gradients of the selected token candidates to calculate the top candidates; secondly, it evaluates the top candidates explicitly to identify the most suitable one; and lastly, it iteratively injects the best token at each position to optimize the suffixes. This approximates an extensive greedy search in a computationally efficient manner. 
+
+\begin{algorithm*} [t]
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+    \caption{Greedy Gradient-guided Injection (GGI)\label{alg}}
+    \Input{
+           Model: $\mathcal{M}$,
+           Iterations: $T$,  
+           Batch Size: $b$,
+           Instruction: $I$, 
+           Demos: $C$,
+           Query: $(x_Q, y_Q)$ 
+           Target: $y_T$\\
+           }
+    \textbf{Initialization}: 
+                $p^\prime_0 = [I;\ [S(x_1 + \delta_1, y_1);\  \cdots; \ S(x_N + \delta_N, y_N)];\ S(x_Q, y_T)]$ \\ 
+    \Repeat{$T$ times}{
+        \For {$i \in N$}{
+            % \begin{flushleft}
+            % $\delta_i^{(k)}= \mathrm{Top-}k(-\nabla_{p^\prime} \mathcal{L}(\mathcal{M}(\hat{y}|p^\prime_{t-1}),y_Q))$   \hspace{\fill} \textit{/* Compute top-k substitutions */ }
+            $[\delta_{i_1}; ...; \delta_{i_k}]= \mathrm{Top-}k(-\nabla_{p^\prime} \mathcal{L}(\mathcal{M}(\hat{y}|p^\prime_{t-1}),y_T))$   \hspace{\fill} \textit{/* Compute top-k substitutions */ }
+            % \end{flushleft}
+        }
+        \begin{flushleft}
+            $K = \{[\delta_{i_1};\ ...;\ \delta_{i_k}]\ |\ i = 1,\ ...,N\}$
+        \end{flushleft}
+        \begin{flushleft}
+            $B = \left\{ (\delta_{i1}, \ldots, \delta_{ib}) \mid (\delta_{i1}, \ldots, \delta_{ik}) \in K \right\}$ \hspace{\fill} \textit{/* Make a subset of substitution */ }
+        \end{flushleft}
+        \For {$i \in N$}{
+            $\delta_i^\star = \delta_{ij}$, where $j = \mathrm{argmin}_{\delta_{ib}}\mathcal{L}(\mathcal{M}(\hat{y}|p^\prime_{t-1}),y_T) $  \hspace{\fill} \textit{/* Compute best replacement */ }
+        }
+        
+        \begin{flushleft}
+            $\Delta = [\delta_1^\star;\ ...;\ \delta_N^\star$]
+        \end{flushleft}
+
+        \begin{flushleft}
+            $p^\prime_t = [I;\ [S(x_1 + \delta_1^\star, y_1);\  \cdots; \ S(x_N + \delta_N^\star, y_N)];\ S(x_Q, y_T)]$ 
+            \hspace{\fill} \textit{ /* Update prompt */ }
+        \end{flushleft}
+    }
+    \Output{Optimized prompt suffixes $[\delta_1^\star, \cdots, \delta_N^\star]$}
+\end{algorithm*}

@@ -1,0 +1,61 @@
+\section{Experiment Setup} 
+\label{chap:experiment}
+
+\subsection{Datasets}
+
+We evaluate the performance of our LLM hijacking algorithm and other baseline algorithms on three classification datasets covering sentiment analysis and topic generation tasks. SST-2 \cite{socher2013recursive} and Rotten Tomatoes (RT) \cite{Pang+Lee:05a} are both binary sentiment analysis datasets of movie reviews. AG's News \cite{Zhang2015CharacterlevelCN} is a multi-class news topic classification dataset. These datasets allow us to evaluate the hijacking attacks on a diverse set of text classification benchmarks across both binary and multi-class settings. 
+
+We show the dataset statistics in Table \ref{tab:dataset}. Specifically for the SST-2 and RT sentiment analysis tasks, we employ only 2 training queries to train adversarial suffixes using our GGI method. We use 4 training queries for the more complex multi-class topic generation tasks, i.e., AG's News. We randomly select 1,000 samples as user queries for testing.
+
+\begin{table}[h]
+\small
+\centering
+\caption{Statistics of the training queries used in Algorithm \ref{alg} and test queries for the three datasets. \label{tab:dataset}}
+\begin{tabular}{c|c|c}
+\hline
+Datasets & Training Queries & Test Queries \\ \hline
+SST-2     & 2 & 1,000         \\ 
+RT       & 2                  & 1,000         \\ 
+AG's News  & 4                & 1,000         \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Large Language Models}
+
+The experiments are conducted using three different LLMs, GPT2-XL \cite{radford2019language}, LLaMA-7b/13b \cite{touvron2023llama}, OPT-2.7b/6.7b \cite{zhang2022opt}, and Vicuna-7b \cite{chiang2023vicuna} allowing us to evaluate attack effectiveness on both established and SOTA LLMs. The choice of LLMs covers a diverse set of architectures and model sizes, enabling a comprehensive evaluation of the vulnerability of LLMs via adversarial ICL. 
+
+\subsection{ICL Settings}
+
+\begin{figure*} [t]
+  \centering
+  \includegraphics[width=\linewidth]{fig/template.png} 
+  \caption{Template designs for all the datasets used in our experiments. We also provide examples for these datasets in Figure \ref{fig:eg_sst2} and Figure \ref{fig:eg_ag} to ensure a better understanding. \label{fig:template}}
+\end{figure*}
+
+For ICL, we follow the setting in \cite{wang2023adversarial} and use their template to incorporate the demos for prediction. Figure \ref{fig:template} illustrates the prompt template employed in ICL for various tasks. For the SST2/RT dataset, the template is structured to include an instruction, a demo set composed of reviews and sentiment labels, and the user query. Similarly, the AG's News dataset template comprises the instruction, the demo set with articles and topic labels, and the user query. Additionally, examples are provided in Figure \ref{fig:eg_sst2}  and Figure \ref{fig:eg_ag} to enhance understanding.  
+
+We evaluate the 2-shot, 4-shot, and 8-shot settings for the number of demos. Specifically, for each test example, we randomly select the demos from the training set and repeat this process 5 times, reporting the average accuracy over the repetitions. 
+
+\subsection{Evaluation Metrics}
+
+Several different metrics evaluate the performance of ICL and hijacking attacks. Clean accuracy evaluates the accuracy of ICL on downstream tasks using clean demos. Attack accuracy evaluates the accuracy of ICL given the perturbed demons. Defense accuracy demonstrates the accuracy of ICL with the defense method against the hijacking attack. We further evaluate the effectiveness of hijacking attacks using attack success rate (ASR). Given a test sample $(x, y)$ from a test set $D$, the clean and perturbed prompts are denoted as $p = [I; C; x]$ and $p^\prime = [I; C^\prime; x]$, respectively. ASR is calculated as:
+\begin{equation}
+    \label{eq:asr}
+    \mathrm{ASR} = \underset{(x,y) \in D}{\sum}\frac{\mathbbm{1}(\mathcal{M}(p^\prime) = y_{T})}{\mathbbm{1}(\mathcal{M}(p) = y)},
+\end{equation}
+where $\mathbbm{1}$ denotes the indicator function. 
+
+\subsection{Baseline Attacks}
+\label{text: baseline}
+
+\subsubsection{Greedy Search}
+
+We consider a heuristics-based perturbation strategy, which conducts a greedy search over the vocabulary to select tokens, maximizing the reduction in the adversarial loss from Eq. \ref{eq:loss}. Specifically, it iteratively picks the token that decreases the loss the most at each step.
+
+\subsubsection{Square Attack}
+
+The square attack \cite{andriushchenko2020square} is an iterative algorithm for optimizing high-dimensional black-box functions using only function evaluations. To find an input $x + \delta$ in the demo set $C$ that minimizes the loss in Eq. \ref{eq:loss}, the square attack has three steps: Step 1: Select a subset of inputs to update; Step 2: Sample candidate values to substitute for those inputs; Step 3: Update $x + \delta$ with the candidate values that achieve the lowest loss. The square attack can optimize the hijacking attack objective function without requiring gradient information by iteratively selecting and updating a subset of inputs.
+
+\subsubsection{Text Attack}
+
+We also utilize TextAttack (TA) \cite{morris2020textattack}, adopting a similar approach to the attack described by \cite{wang2023adversarial}, which serves as the most closely related baseline for our hijacking attack. Different from our word-level attack, the use of TA at the character level includes minor modifications to some words in the in-context demos and simply flips the labels of user queries, as depicted in Figure \ref{fig:example}. In our experiments, we employ a transformation where characters are swapped with those on adjacent QWERTY keyboard keys, mimicking errors typical of fast typing, as done in TextAttack \cite{morris2020textattack}. Specifically, we use the adversarial examples for the same demos in our hijacking attack during the application of TA.

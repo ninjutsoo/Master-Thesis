@@ -1,0 +1,13 @@
+\section{Conclusion and Future Work}
+\label{chap:conclusion}
+
+\subsection{Conclusion}
+
+ICL demonstrates significant potential for employing LLMs across multiple tasks through simple demonstrations without requiring retraining or fine-tuning of the models. Concernedly, this work reveals the vulnerability of ICL via crafted hijacking attacks. Our attack method uses a greedy gradient-based algorithm to append nearly imperceptible adversarial suffixes to the in-context demos, effectively diverting the LLMs' attention from the relevant context to these adversarial suffixes, causing the LLMs to generate undesirable outputs. We also suggest a defense method against hijacking attacks by incorporating additional demos, improving LLMs' robustness during ICL. The comprehensive experimental results from multiple tasks using various LLMs demonstrate the effectiveness of our proposed attack and defense methods. 
+
+\subsection{Future Work}
+
+Currently, our empirical evaluations focus on measuring the success rate of attacks, particularly in tasks such as sentiment analysis and topic generation, which depend on the generation of single tokens. Moving forward, we plan to expand our scope to include more intricate downstream tasks like machine translation, text summarization, and question answering. These tasks present unique challenges due to their complexity and the necessity for maintaining coherence over longer text spans, thus providing a richer framework for testing and enhancing attack methodologies.
+
+In terms of future work for defense methods, there is a pressing need to develop robust mechanisms that can protect against the hijacking attacks we have proposed. This involves improving the detection and mitigation of adversarial inputs and enhancing the robustness of models under a variety of attack scenarios. It is crucial to deepen our understanding of model vulnerabilities and address them by incorporating security audits and defensive tactics into the training and inference process, which is essential for protecting against more sophisticated adversarial methods.
+

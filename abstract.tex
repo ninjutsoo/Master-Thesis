@@ -1,0 +1,32 @@
+% Use unnumbered section for abstract
+\section*{ABSTRACT}
+
+% Add reference to the table of contents {toc} at the section level {section} titled "Abstract" {Abstract}
+\addcontentsline{toc}{section}{Abstract}
+\centerline{\bf HIJACKING LARGE LANGUAGE MODELS VIA}
+\vspace{-0.4cm}
+\centerline{\bf ADVERSARIAL IN-CONTEXT LEARNING}
+% \vspace{-0.4cm}
+% \centerline{\bf TITLE LINE 3 (if needed)}
+
+{\setlength\baselineskip{0.3in}
+	\begin{center}
+	by\\
+	\medskip
+	{\bf YAO QIANG}\\
+	\medskip
+	{\bf August 2024}\\
+	\end{center}
+	\Vspc
+	\begin{tabular}{ll}
+		{\bf Advisor:} & Dr. Dongxiao Zhu \\
+		{\bf Major:} & Computer Science \\
+		{\bf Degree:} & Master of Science
+	\end{tabular}
+}
+
+\bigskip \bigskip
+
+In-context learning (ICL) has emerged as a powerful paradigm leveraging LLMs for specific downstream tasks by utilizing labeled examples as demonstrations in the precondition prompts. Despite its promising performance, ICL suffers from instability with the choice and arrangement of examples. Additionally, crafted adversarial attacks pose a notable threat to the robustness of ICL. However, existing attacks are either easy to detect, rely on external models, or lack specificity towards ICL. 
+
+This thesis introduces a novel transferable attack for ICL to address these issues, aiming to hijack LLMs to generate the targeted response. The proposed hijacking attack leverages a gradient-based prompt search method to learn and append imperceptible adversarial suffixes to the in-context demonstrations. Extensive experimental results on various tasks and datasets demonstrate the effectiveness of our hijacking attack, resulting in distracted attention towards adversarial tokens and consequently leading to unwanted target outputs. We also propose a defense strategy against hijacking attacks through the use of extra demonstrations, which enhances the robustness of LLMs during ICL. Broadly, this work reveals the significant security vulnerabilities of LLMs and emphasizes the necessity for in-depth studies on the robustness of LLMs related to ICL.
