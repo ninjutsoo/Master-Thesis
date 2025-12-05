@@ -1,0 +1,326 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\providecommand \oddpage@label [2]{}
+\@writefile{toc}{\contentsline {section}{Acknowledgements}{ii}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{List of Tables}{iv}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{List of Figures}{v}{section*.3}\protected@file@percent }
+\citation{achiam2023gpt}
+\citation{touvron2023llama}
+\citation{brown2020language}
+\citation{dong2022survey}
+\citation{min2022rethinking}
+\citation{zhao2021calibrate}
+\citation{chen2022relation}
+\citation{qiang2020toward}
+\citation{lu2021fantastically}
+\citation{min2022rethinking}
+\citation{pezeshkpour2023large}
+\citation{qiang2024prompt}
+\citation{liu2021makes}
+\citation{wu2022self}
+\citation{nguyen2023context}
+\citation{zhu2023promptbench}
+\citation{wang2023adversarial}
+\citation{wang2023robustness}
+\citation{shayegani2023survey}
+\citation{zhu2023promptbench}
+\citation{zou2023universal}
+\citation{xu2023instructions}
+\citation{wang2023adversarial}
+\citation{mo2023trustworthy}
+\citation{wang2023robustness}
+\citation{kandpal2023backdoor}
+\citation{wang2023adversarial}
+\citation{wang2023adversarial}
+\citation{morris2020textattack}
+\citation{li2018textbugger}
+\citation{qiang2022tiny}
+\citation{jain2023baseline}
+\citation{li2020bert}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{chap:Introduction}{{1}{1}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Background}{1}{subsection.1.1}\protected@file@percent }
+\citation{zhu2023promptbench}
+\citation{wang2023robustness}
+\citation{zhu2023promptbench}
+\citation{zou2023universal}
+\citation{wang2023adversarial}
+\citation{mo2023trustworthy}
+\citation{wang2023robustness}
+\citation{kandpal2023backdoor}
+\citation{morris2020textattack}
+\citation{li2018textbugger}
+\citation{wang2023adversarial}
+\citation{kandpal2023backdoor}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Illustrations of ICL using clean prompt and adversarial prompt. Given the clean in-context demos, LLMs can correctly generate the sentiment of the test queries. The previous attacks \cite  {wang2023adversarial} at the character level involve minor edits in some words, such as altering `so' to `s0' and `film' to `fi1m', of these in-context demos, leading to incorrect sentiment generated for the test queries. However, ours \textbf  {learns} to \textbf  {append} adversarial suffixes like `For' and `Location' to the in-context demos to efficiently and effectively \textbf  {hijack} LLMs to generate the \textbf  {unwanted target}, e.g., the `negative' sentiment, \textbf  {regardless} of the test query content. }}{2}{figure.caption.4}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:example}{{1}{2}{Illustrations of ICL using clean prompt and adversarial prompt. Given the clean in-context demos, LLMs can correctly generate the sentiment of the test queries. The previous attacks \cite {wang2023adversarial} at the character level involve minor edits in some words, such as altering `so' to `s0' and `film' to `fi1m', of these in-context demos, leading to incorrect sentiment generated for the test queries. However, ours \textbf {learns} to \textbf {append} adversarial suffixes like `For' and `Location' to the in-context demos to efficiently and effectively \textbf {hijack} LLMs to generate the \textbf {unwanted target}, e.g., the `negative' sentiment, \textbf {regardless} of the test query content}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Adversarial Attack on ICL}{2}{subsection.1.2}\protected@file@percent }
+\citation{mo2023test}
+\citation{wei2023jailbreak}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Defense against Adversarial Attack on ICL}{4}{subsection.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Contribution}{4}{subsection.1.4}\protected@file@percent }
+\citation{devlin2018bert}
+\citation{lewis2019bart}
+\citation{radford2019language}
+\citation{brown2020language}
+\citation{schaeffer2023emergent}
+\citation{wei2022emergent}
+\citation{liu2021makes}
+\citation{rubin2021learning}
+\citation{liu2021makes}
+\citation{xie2021explanation}
+\citation{razeghi2022impact}
+\citation{min2022rethinking}
+\citation{wei2023larger}
+\citation{kossen2023context}
+\citation{xie2021explanation}
+\citation{lu2021fantastically}
+\citation{zhao2021calibrate}
+\citation{min2022rethinking}
+\citation{nguyen2023context}
+\citation{morris2020textattack}
+\citation{li2020bert}
+\citation{li2021improving}
+\citation{perez2022ignore}
+\citation{li2023learning}
+\citation{qiang2023interpretability}
+\citation{casper2023explore}
+\citation{kang2023exploiting}
+\citation{li2023multi}
+\citation{shen2023anything}
+\citation{shen2023anything}
+\citation{zhu2023autodan}
+\citation{chao2023jailbreaking}
+\citation{mehrotra2023tree}
+\citation{jeong2023hijacking}
+\citation{guo2024cold}
+\citation{yu2024don}
+\citation{ganguli2022red}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{5}{section.2}\protected@file@percent }
+\newlabel{chap:relatedwork}{{2}{5}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}In-Context Learning}{5}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Adversarial Attacks on LLMs}{5}{subsection.2.2}\protected@file@percent }
+\citation{wen2023hard}
+\citation{zou2023universal}
+\citation{shin2020autoprompt}
+\citation{schwarzschild2024rethinking}
+\citation{zou2023universal}
+\citation{pawelczyk2023context}
+\citation{zhao2024universal}
+\citation{goyal2023survey}
+\citation{studnia2023evaluating}
+\citation{liu2023shortcuts}
+\citation{xu2024llm}
+\citation{wu2024new}
+\citation{liu2020adversarial}
+\citation{li2023defending}
+\citation{formento2024semrode}
+\citation{wang2024mitigating}
+\citation{qiang2024prompt}
+\citation{yuan2024rigorllm}
+\citation{jain2023baseline}
+\citation{alon2023detecting}
+\citation{mo2023test}
+\citation{wei2023jailbreak}
+\citation{mo2023test}
+\citation{wei2023jailbreak}
+\citation{wang2024mitigating}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Defense Against Attacks on LLMs}{7}{subsection.2.3}\protected@file@percent }
+\citation{liu2021makes}
+\citation{zou2023universal}
+\citation{maus2023black}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Preliminaries}{9}{section.3}\protected@file@percent }
+\newlabel{chap:pre}{{3}{9}{Preliminaries}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}ICL Formulation}{9}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Adversarial Attack on LLMs}{9}{subsection.3.2}\protected@file@percent }
+\citation{wang2023adversarial}
+\citation{morris2020textattack}
+\citation{li2018textbugger}
+\@writefile{toc}{\contentsline {section}{\numberline {4}The Threat Model}{11}{section.4}\protected@file@percent }
+\newlabel{chap:threat}{{4}{11}{The Threat Model}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}ICL Hijacking Attack}{11}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Hijacking Attack Objective}{12}{subsection.4.2}\protected@file@percent }
+\newlabel{eq:loss}{{4.3}{12}{Hijacking Attack Objective}{equation.4.3}{}}
+\citation{carlini2023aligned}
+\citation{shin2020autoprompt}
+\citation{zou2023universal}
+\citation{wen2024hard}
+\citation{ebrahimi2017hotflip}
+\citation{shin2020autoprompt}
+\newlabel{eq:optim}{{4.4}{13}{Hijacking Attack Objective}{equation.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Greedy Gradient-guided Injection}{13}{subsection.4.3}\protected@file@percent }
+\newlabel{alg}{{1}{14}{Greedy Gradient-guided Injection}{algocf.1}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Greedy Gradient-guided Injection (GGI)}}{14}{algocf.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}The Defense Method}{15}{section.5}\protected@file@percent }
+\newlabel{chap:defense}{{5}{15}{The Defense Method}{section.5}{}}
+\citation{socher2013recursive}
+\citation{Pang+Lee:05a}
+\citation{Zhang2015CharacterlevelCN}
+\citation{radford2019language}
+\citation{touvron2023llama}
+\citation{zhang2022opt}
+\citation{chiang2023vicuna}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Experiment Setup}{16}{section.6}\protected@file@percent }
+\newlabel{chap:experiment}{{6}{16}{Experiment Setup}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Datasets}{16}{subsection.6.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Statistics of the training queries used in Algorithm \ref {alg} and test queries for the three datasets. }}{16}{table.caption.6}\protected@file@percent }
+\newlabel{tab:dataset}{{1}{16}{Statistics of the training queries used in Algorithm \ref {alg} and test queries for the three datasets}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Large Language Models}{16}{subsection.6.2}\protected@file@percent }
+\citation{wang2023adversarial}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Template designs for all the datasets used in our experiments. We also provide examples for these datasets in Figure \ref {fig:eg_sst2} and Figure \ref {fig:eg_ag} to ensure a better understanding. }}{17}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:template}{{2}{17}{Template designs for all the datasets used in our experiments. We also provide examples for these datasets in Figure \ref {fig:eg_sst2} and Figure \ref {fig:eg_ag} to ensure a better understanding}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}ICL Settings}{17}{subsection.6.3}\protected@file@percent }
+\citation{andriushchenko2020square}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Evaluation Metrics}{18}{subsection.6.4}\protected@file@percent }
+\newlabel{eq:asr}{{6.1}{18}{Evaluation Metrics}{equation.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Baseline Attacks}{18}{subsection.6.5}\protected@file@percent }
+\newlabel{text: baseline}{{6.5}{18}{Baseline Attacks}{subsection.6.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.1}Greedy Search}{18}{subsubsection.6.5.1}\protected@file@percent }
+\citation{morris2020textattack}
+\citation{wang2023adversarial}
+\citation{morris2020textattack}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.2}Square Attack}{19}{subsubsection.6.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.5.3}Text Attack}{19}{subsubsection.6.5.3}\protected@file@percent }
+\citation{morris2020textattack}
+\citation{wang2023adversarial}
+\citation{morris2020textattack}
+\citation{wang2023adversarial}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Result and Discussion}{20}{section.7}\protected@file@percent }
+\newlabel{chap:results}{{7}{20}{Result and Discussion}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}ICL Performance}{20}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}ICL Performance with Hijacking Attack}{20}{subsection.7.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces The performance on sentiment analysis task with and without attacks on ICL. The row identified as `Clean' in gray color represents the accuracy with clean in-context demos. Other rows illustrate the accuracies with adversarial in-context demos. The details of the baselines in green color are present in Section \ref {text: baseline}. Specifically, we employ TextAttack (TA) \cite  {morris2020textattack} following the attack in \cite  {wang2023adversarial} as the most closely related baseline for our attack (GGI). The accuracies of positive (\textcolor {red}{P}) and negative (\textcolor {blue}{N}) sentiments are reported separately to highlight the effectiveness of our hijacking attack. }}{21}{table.caption.8}\protected@file@percent }
+\newlabel{tab:Sen_acc}{{2}{21}{The performance on sentiment analysis task with and without attacks on ICL. The row identified as `Clean' in gray color represents the accuracy with clean in-context demos. Other rows illustrate the accuracies with adversarial in-context demos. The details of the baselines in green color are present in Section \ref {text: baseline}. Specifically, we employ TextAttack (TA) \cite {morris2020textattack} following the attack in \cite {wang2023adversarial} as the most closely related baseline for our attack (GGI). The accuracies of positive (\textcolor {red}{P}) and negative (\textcolor {blue}{N}) sentiments are reported separately to highlight the effectiveness of our hijacking attack}{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces The performance of AG's News topic generation task with and without attacks on ICL. The clean and attack accuracies are reported separately for the four topics. These results highlight the effectiveness of our hijacking attacks to induce LLMs to generate the target token, i.e., ``tech'', regardless of the query content. }}{22}{table.caption.9}\protected@file@percent }
+\newlabel{tab:AG_acc}{{3}{22}{The performance of AG's News topic generation task with and without attacks on ICL. The clean and attack accuracies are reported separately for the four topics. These results highlight the effectiveness of our hijacking attacks to induce LLMs to generate the target token, i.e., ``tech'', regardless of the query content}{table.caption.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces ASR among different datasets, models, and attack methods. Best scores are in bold.}}{22}{table.caption.10}\protected@file@percent }
+\newlabel{tab:asr}{{4}{22}{ASR among different datasets, models, and attack methods. Best scores are in bold}{table.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Defense Method Performance}{22}{subsection.7.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces The performance of the defenses using ASRs across various LLMs and datasets. Adv denotes our hijacking attack using the adversarial demos. Adv+Clean represents the proposed defense method, leveraging extra clean demos with adversarial demos. The numbers within the parenthesis indicate the reduction in the ASRs after defense. }}{23}{table.caption.11}\protected@file@percent }
+\newlabel{tab:defense}{{5}{23}{The performance of the defenses using ASRs across various LLMs and datasets. Adv denotes our hijacking attack using the adversarial demos. Adv+Clean represents the proposed defense method, leveraging extra clean demos with adversarial demos. The numbers within the parenthesis indicate the reduction in the ASRs after defense}{table.caption.11}{}}
+\newlabel{fig:sub1}{{3a}{24}{SST-2}{figure.caption.12}{}}
+\newlabel{sub@fig:sub1}{{a}{24}{SST-2}{figure.caption.12}{}}
+\newlabel{fig:sub2}{{3b}{24}{RT}{figure.caption.12}{}}
+\newlabel{sub@fig:sub2}{{b}{24}{RT}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Average perplexity scores reported for LLaMA2-7b on 100 random samples under eight-shots setting from SST-2 (a) and RT (b) derived from three separate runs under various attacks.}}{24}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:ppl}{{3}{24}{Average perplexity scores reported for LLaMA2-7b on 100 random samples under eight-shots setting from SST-2 (a) and RT (b) derived from three separate runs under various attacks}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Stealthiness of GGI}{24}{subsection.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Impact of Number of In-context Demos}{24}{subsection.7.5}\protected@file@percent }
+\citation{wang2023large}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Impact of LLM size on adversarial robustness. ASRs on the AG's News topic generation task using different sizes of OPT models, i.e., OPT-2.7b and OPT-6.7b, with two different few-shot settings. }}{25}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:modelsize}{{4}{25}{Impact of LLM size on adversarial robustness. ASRs on the AG's News topic generation task using different sizes of OPT models, i.e., OPT-2.7b and OPT-6.7b, with two different few-shot settings}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Impact of Sizes of LLMs}{25}{subsection.7.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces An illustration of the learning objective values during iterations among different attacks on SST2 using GPT2-XL with 8-shots. }}{26}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:losses}{{5}{26}{An illustration of the learning objective values during iterations among different attacks on SST2 using GPT2-XL with 8-shots}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.7}Comparison of Hijacking Attacks}{26}{subsection.7.7}\protected@file@percent }
+\newlabel{fig:am_clean}{{6a}{27}{\relax }{figure.caption.15}{}}
+\newlabel{sub@fig:am_clean}{{a}{27}{\relax }{figure.caption.15}{}}
+\newlabel{fig:am_perturb}{{6b}{27}{\relax }{figure.caption.15}{}}
+\newlabel{sub@fig:am_perturb}{{b}{27}{\relax }{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Attentions maps generated using (a) clean and (b) adversarial perturbed prompts. In (b), the adversarial suffix tokens, i.e., `NULL' and `Remove', are underlined in red. Darker green colors represent larger attention weights. The prompts are tokenized to mimic the actual inputs to the LLMs. Best viewed in color.}}{27}{figure.caption.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.8}Diverting LLM Attention}{27}{subsection.7.8}\protected@file@percent }
+\newlabel{fig:am_pre}{{7a}{28}{\relax }{figure.caption.16}{}}
+\newlabel{sub@fig:am_pre}{{a}{28}{\relax }{figure.caption.16}{}}
+\newlabel{fig:am_pro}{{7b}{28}{\relax }{figure.caption.16}{}}
+\newlabel{sub@fig:am_pro}{{b}{28}{\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Attentions maps generated using (a) Preceding and (b) Proceeding defense methods. Best viewed in color.}}{28}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:am_defense}{{7}{28}{Attentions maps generated using (a) Preceding and (b) Proceeding defense methods. Best viewed in color}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Visualization of an adversarial example generated by baseline and our attacks on SST-2 via attacking LLaMA-7b.}}{29}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:eg_sst2}{{8}{29}{Visualization of an adversarial example generated by baseline and our attacks on SST-2 via attacking LLaMA-7b}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Visualization of an adversarial example generated by baseline and our attacks on AG's News via attacking LLaMA-7b.}}{30}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:eg_ag}{{9}{30}{Visualization of an adversarial example generated by baseline and our attacks on AG's News via attacking LLaMA-7b}{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion and Future Work}{31}{section.8}\protected@file@percent }
+\newlabel{chap:conclusion}{{8}{31}{Conclusion and Future Work}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Conclusion}{31}{subsection.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Future Work}{31}{subsection.8.2}\protected@file@percent }
+\bibdata{bib/mybib}
+\bibcite{achiam2023gpt}{1}
+\bibcite{alon2023detecting}{2}
+\bibcite{andriushchenko2020square}{3}
+\bibcite{brown2020language}{4}
+\bibcite{carlini2023aligned}{5}
+\bibcite{casper2023explore}{6}
+\bibcite{chao2023jailbreaking}{7}
+\bibcite{chen2022relation}{8}
+\bibcite{chiang2023vicuna}{9}
+\@writefile{toc}{\contentsline {section}{References}{33}{section*.19}\protected@file@percent }
+\bibcite{devlin2018bert}{10}
+\bibcite{dong2022survey}{11}
+\bibcite{ebrahimi2017hotflip}{12}
+\bibcite{formento2024semrode}{13}
+\bibcite{ganguli2022red}{14}
+\bibcite{goyal2023survey}{15}
+\bibcite{guo2024cold}{16}
+\bibcite{jain2023baseline}{17}
+\bibcite{jeong2023hijacking}{18}
+\bibcite{kandpal2023backdoor}{19}
+\bibcite{kang2023exploiting}{20}
+\bibcite{kossen2023context}{21}
+\bibcite{lewis2019bart}{22}
+\bibcite{li2023multi}{23}
+\bibcite{li2018textbugger}{24}
+\bibcite{li2023defending}{25}
+\bibcite{li2020bert}{26}
+\bibcite{li2023learning}{27}
+\bibcite{li2021improving}{28}
+\bibcite{liu2021makes}{29}
+\bibcite{liu2023shortcuts}{30}
+\bibcite{liu2020adversarial}{31}
+\bibcite{lu2021fantastically}{32}
+\bibcite{maus2023black}{33}
+\bibcite{mehrotra2023tree}{34}
+\bibcite{min2022rethinking}{35}
+\bibcite{mo2023trustworthy}{36}
+\bibcite{mo2023test}{37}
+\bibcite{morris2020textattack}{38}
+\bibcite{nguyen2023context}{39}
+\bibcite{Pang+Lee:05a}{40}
+\bibcite{pawelczyk2023context}{41}
+\bibcite{perez2022ignore}{42}
+\bibcite{pezeshkpour2023large}{43}
+\bibcite{qiang2022tiny}{44}
+\bibcite{qiang2023interpretability}{45}
+\bibcite{qiang2020toward}{46}
+\bibcite{qiang2024prompt}{47}
+\bibcite{radford2019language}{48}
+\bibcite{razeghi2022impact}{49}
+\bibcite{rubin2021learning}{50}
+\bibcite{schaeffer2023emergent}{51}
+\bibcite{schwarzschild2024rethinking}{52}
+\bibcite{shayegani2023survey}{53}
+\bibcite{shen2023anything}{54}
+\bibcite{shin2020autoprompt}{55}
+\bibcite{socher2013recursive}{56}
+\bibcite{studnia2023evaluating}{57}
+\bibcite{touvron2023llama}{58}
+\bibcite{wang2023large}{59}
+\bibcite{wang2023robustness}{60}
+\bibcite{wang2024mitigating}{61}
+\bibcite{wang2023adversarial}{62}
+\bibcite{wei2022emergent}{63}
+\bibcite{wei2023larger}{64}
+\bibcite{wei2023jailbreak}{65}
+\bibcite{wen2023hard}{66}
+\bibcite{wen2024hard}{67}
+\bibcite{wu2024new}{68}
+\bibcite{wu2022self}{69}
+\bibcite{xie2021explanation}{70}
+\bibcite{xu2023instructions}{71}
+\bibcite{xu2024llm}{72}
+\bibcite{yu2024don}{73}
+\bibcite{yuan2024rigorllm}{74}
+\bibcite{zhang2022opt}{75}
+\bibcite{Zhang2015CharacterlevelCN}{76}
+\bibcite{zhao2024universal}{77}
+\bibcite{zhao2021calibrate}{78}
+\bibcite{zhu2023promptbench}{79}
+\bibcite{zhu2023autodan}{80}
+\bibcite{zou2023universal}{81}
+\bibstyle{abbrv}
+\@writefile{toc}{\contentsline {section}{Appendix}{43}{section*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Abstract}{44}{section*.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{Autobiographical Statement}{46}{section*.22}\protected@file@percent }
+\gdef \@abspage@last{51}

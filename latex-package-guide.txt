@@ -1,0 +1,103 @@
+LaTeX toolchain setup + troubleshooting (Dec 2025)
+==================================================
+
+Repo: C:\Users\mrosh\OneDrive\Documents\GitHub\New-Web_Questionnaire-App\Master-Thesis
+
+Goal: compile `main.tex` to `main.pdf` with LaTeX Workshop in Cursor/VS Code, keep live preview, and recover quickly on a new Windows machine.
+
+--------------------------------------------------
+1. Install prerequisites
+--------------------------------------------------
+
+1. MiKTeX (TeX distribution with `pdflatex`, `latexmk`, etc.)
+   Command (PowerShell or cmd):
+     winget install --id=MiKTeX.MiKTeX --silent --accept-package-agreements --accept-source-agreements
+
+2. Strawberry Perl (needed because MiKTeX’s `latexmk` uses Perl):
+     winget install --id=StrawberryPerl.StrawberryPerl --silent --accept-package-agreements --accept-source-agreements
+
+3. Restart Cursor/VS Code after installs so new PATH entries are picked up.
+
+--------------------------------------------------
+2. Verify binaries
+--------------------------------------------------
+
+Open a fresh terminal and run:
+  latexmk -v
+  pdflatex --version
+
+If both work, skip to section 4. Otherwise continue.
+
+--------------------------------------------------
+3. Fix PATH issues when Cursor cannot see latexmk
+--------------------------------------------------
+
+Symptom we saw: building via LaTeX Workshop reports "`latexmk` is not recognized" even though MiKTeX is installed. Cursor’s bundled shell did not inherit PATH, so we created a shim in a directory Cursor already uses.
+
+Steps:
+1. Create/overwrite `C:\Users\<you>\AppData\Local\Programs\cursor\resources\app\bin\latexmk.cmd` with the content below (replace `<you>` if necessary):
+
+@echo off
+set "PATH=C:\Users\<you>\AppData\Local\Programs\MiKTeX\miktex\bin\x64;C:\Strawberry\perl\bin;C:\Strawberry\perl\site\bin;C:\Strawberry\c\bin;%PATH%"
+"C:\Users\<you>\AppData\Local\Programs\MiKTeX\miktex\bin\x64\latexmk.exe" %*
+
+2. Open a new terminal and run `latexmk -v` again. This wrapper prepends the needed folders so LaTeX Workshop can call latexmk even if the global PATH is missing.
+
+3. If you still see “MiKTeX could not find the script engine 'perl'”, double-check Strawberry Perl is installed and the wrapper above includes its bin paths.
+
+--------------------------------------------------
+4. Build thesis manually (one-off test)
+--------------------------------------------------
+
+cd C:\Users\mrosh\OneDrive\Documents\GitHub\New-Web_Questionnaire-App\Master-Thesis
+latexmk -pdf main.tex
+
+This should produce `main.pdf` in the repo root. If MiKTeX prompts for missing packages, click **Install**; see section 5 for making it automatic.
+
+--------------------------------------------------
+5. Handle MiKTeX package popups
+--------------------------------------------------
+
+During the first build we hit `ifoddpage.sty` missing. If popups keep reappearing:
+
+1. Open “MiKTeX Console” (Start menu).
+2. Switch to **Admin** mode if needed.
+3. Use **Packages** tab → search for the missing package (e.g. `ifoddpage`) → click **+ Install**.
+4. In **Settings → General**, set “Install missing packages on-the-fly” to “Yes” so future dependencies install without prompts.
+5. Run **Updates → Check for updates** once to clear the “haven’t checked for updates” warning latexmk prints.
+
+--------------------------------------------------
+6. Enable automatic builds + live preview in Cursor
+--------------------------------------------------
+
+1. Open settings (Ctrl+,), switch to the **Editor** tab (not Agent), search for `latex auto build`.
+2. Set **LaTeX Workshop › Latex › Auto Build: Run** to `onSave` (or `onFileChange` if you want more aggressive updates).
+3. Open `main.tex`, hit Ctrl+Alt+B once to ensure the recipe works, then open the PDF preview via `LaTeX Workshop: View LaTeX PDF`. The viewer refreshes automatically after each auto-build.
+4. Optional terminal watcher: `latexmk -pdf -pvc main.tex` keeps compiling on changes even outside VS Code. Stop with Ctrl+C.
+
+--------------------------------------------------
+7. Common errors + fixes we already encountered
+--------------------------------------------------
+
+- `latexmk` not found: install MiKTeX, Strawberry Perl, and/or create the wrapper script in section 3.
+- `MiKTeX could not find the script engine 'perl'`: Strawberry Perl missing from PATH—install via winget and ensure wrapper adds its bins.
+- `pdflatex is not recognized`: occurs when PATH lacks MiKTeX bin—same fix as above.
+- Repeated package popup (e.g., `ifoddpage`): install manually in MiKTeX Console; enable auto package install.
+- LaTeX Workshop says “Active document is not a TeX file”: ensure the tab is actually `*.tex` and language mode (status bar) is set to LaTeX.
+- Cannot find auto-build setting: make sure you’re in the Editor settings UI or set `"latex-workshop.latex.autoBuild.run": "onSave"` directly in `settings.json`.
+
+--------------------------------------------------
+8. Quick checklist for new machines
+--------------------------------------------------
+
+[ ] Install MiKTeX via winget  
+[ ] Install Strawberry Perl via winget  
+[ ] Create/verify `latexmk.cmd` wrapper (section 3) if Cursor doesn’t pick up PATH  
+[ ] Run `latexmk -v` and `pdflatex --version` successfully  
+[ ] Build once: `latexmk -pdf main.tex`  
+[ ] Approve/install missing packages in MiKTeX Console + enable auto install  
+[ ] Enable auto-build in LaTeX Workshop (`onSave`) and open PDF preview  
+[ ] (Optional) run MiKTeX Console → Updates → Check for updates to silence warnings
+
+Following the above restores the exact environment we used to fix every error seen so far.
+

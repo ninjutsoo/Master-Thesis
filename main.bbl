@@ -1,0 +1,481 @@
+\begin{thebibliography}{10}
+
+\bibitem{achiam2023gpt}
+J.~Achiam, S.~Adler, S.~Agarwal, L.~Ahmad, I.~Akkaya, F.~L. Aleman, D.~Almeida,
+  J.~Altenschmidt, S.~Altman, S.~Anadkat, et~al.
+\newblock Gpt-4 technical report.
+\newblock {\em arXiv preprint arXiv:2303.08774}, 2023.
+
+\bibitem{alon2023detecting}
+G.~Alon and M.~Kamfonas.
+\newblock Detecting language model attacks with perplexity.
+\newblock {\em arXiv preprint arXiv:2308.14132}, 2023.
+
+\bibitem{andriushchenko2020square}
+M.~Andriushchenko, F.~Croce, N.~Flammarion, and M.~Hein.
+\newblock Square attack: a query-efficient black-box adversarial attack via
+  random search.
+\newblock In {\em European conference on computer vision}, pages 484--501.
+  Springer, 2020.
+
+\bibitem{brown2020language}
+T.~Brown, B.~Mann, N.~Ryder, M.~Subbiah, J.~D. Kaplan, P.~Dhariwal,
+  A.~Neelakantan, P.~Shyam, G.~Sastry, A.~Askell, et~al.
+\newblock Language models are few-shot learners.
+\newblock {\em Advances in neural information processing systems},
+  33:1877--1901, 2020.
+
+\bibitem{carlini2023aligned}
+N.~Carlini, M.~Nasr, C.~A. Choquette-Choo, M.~Jagielski, I.~Gao, A.~Awadalla,
+  P.~W. Koh, D.~Ippolito, K.~Lee, F.~Tramer, et~al.
+\newblock Are aligned neural networks adversarially aligned?
+\newblock {\em arXiv preprint arXiv:2306.15447}, 2023.
+
+\bibitem{casper2023explore}
+S.~Casper, J.~Lin, J.~Kwon, G.~Culp, and D.~Hadfield-Menell.
+\newblock Explore, establish, exploit: Red teaming language models from
+  scratch.
+\newblock {\em arXiv preprint arXiv:2306.09442}, 2023.
+
+\bibitem{chao2023jailbreaking}
+P.~Chao, A.~Robey, E.~Dobriban, H.~Hassani, G.~J. Pappas, and E.~Wong.
+\newblock Jailbreaking black box large language models in twenty queries.
+\newblock {\em arXiv preprint arXiv:2310.08419}, 2023.
+
+\bibitem{chen2022relation}
+Y.~Chen, C.~Zhao, Z.~Yu, K.~McKeown, and H.~He.
+\newblock On the relation between sensitivity and accuracy in in-context
+  learning.
+\newblock {\em arXiv preprint arXiv:2209.07661}, 2022.
+
+\bibitem{chiang2023vicuna}
+W.-L. Chiang, Z.~Li, Z.~Lin, Y.~Sheng, Z.~Wu, H.~Zhang, L.~Zheng, S.~Zhuang,
+  Y.~Zhuang, J.~E. Gonzalez, et~al.
+\newblock Vicuna: An open-source chatbot impressing gpt-4 with 90\%* chatgpt
+  quality.
+\newblock {\em See https://vicuna. lmsys. org (accessed 14 April 2023)},
+  2(3):6, 2023.
+
+\bibitem{devlin2018bert}
+J.~Devlin, M.-W. Chang, K.~Lee, and K.~Toutanova.
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock {\em arXiv preprint arXiv:1810.04805}, 2018.
+
+\bibitem{dong2022survey}
+Q.~Dong, L.~Li, D.~Dai, C.~Zheng, Z.~Wu, B.~Chang, X.~Sun, J.~Xu, and Z.~Sui.
+\newblock A survey for in-context learning.
+\newblock {\em arXiv preprint arXiv:2301.00234}, 2022.
+
+\bibitem{ebrahimi2017hotflip}
+J.~Ebrahimi, A.~Rao, D.~Lowd, and D.~Dou.
+\newblock Hotflip: White-box adversarial examples for text classification.
+\newblock {\em arXiv preprint arXiv:1712.06751}, 2017.
+
+\bibitem{formento2024semrode}
+B.~Formento, W.~Feng, C.~S. Foo, L.~A. Tuan, and S.-K. Ng.
+\newblock Semrode: Macro adversarial training to learn representations that are
+  robust to word-level attacks.
+\newblock {\em arXiv preprint arXiv:2403.18423}, 2024.
+
+\bibitem{ganguli2022red}
+D.~Ganguli, L.~Lovitt, J.~Kernion, A.~Askell, Y.~Bai, S.~Kadavath, B.~Mann,
+  E.~Perez, N.~Schiefer, K.~Ndousse, et~al.
+\newblock Red teaming language models to reduce harms: Methods, scaling
+  behaviors, and lessons learned.
+\newblock {\em arXiv preprint arXiv:2209.07858}, 2022.
+
+\bibitem{goyal2023survey}
+S.~Goyal, S.~Doddapaneni, M.~M. Khapra, and B.~Ravindran.
+\newblock A survey of adversarial defenses and robustness in nlp.
+\newblock {\em ACM Computing Surveys}, 55(14s):1--39, 2023.
+
+\bibitem{guo2024cold}
+X.~Guo, F.~Yu, H.~Zhang, L.~Qin, and B.~Hu.
+\newblock Cold-attack: Jailbreaking llms with stealthiness and controllability.
+\newblock {\em arXiv preprint arXiv:2402.08679}, 2024.
+
+\bibitem{jain2023baseline}
+N.~Jain, A.~Schwarzschild, Y.~Wen, G.~Somepalli, J.~Kirchenbauer, P.-y. Chiang,
+  M.~Goldblum, A.~Saha, J.~Geiping, and T.~Goldstein.
+\newblock Baseline defenses for adversarial attacks against aligned language
+  models.
+\newblock {\em arXiv preprint arXiv:2309.00614}, 2023.
+
+\bibitem{jeong2023hijacking}
+J.~Jeong.
+\newblock Hijacking context in large multi-modal models.
+\newblock {\em arXiv preprint arXiv:2312.07553}, 2023.
+
+\bibitem{kandpal2023backdoor}
+N.~Kandpal, M.~Jagielski, F.~Tram{\`e}r, and N.~Carlini.
+\newblock Backdoor attacks for in-context learning with language models.
+\newblock {\em arXiv preprint arXiv:2307.14692}, 2023.
+
+\bibitem{kang2023exploiting}
+D.~Kang, X.~Li, I.~Stoica, C.~Guestrin, M.~Zaharia, and T.~Hashimoto.
+\newblock Exploiting programmatic behavior of llms: Dual-use through standard
+  security attacks.
+\newblock {\em arXiv preprint arXiv:2302.05733}, 2023.
+
+\bibitem{kossen2023context}
+J.~Kossen, Y.~Gal, and T.~Rainforth.
+\newblock In-context learning learns label relationships but is not
+  conventional learning.
+\newblock In {\em The Twelfth International Conference on Learning
+  Representations}, 2023.
+
+\bibitem{lewis2019bart}
+M.~Lewis, Y.~Liu, N.~Goyal, M.~Ghazvininejad, A.~Mohamed, O.~Levy, V.~Stoyanov,
+  and L.~Zettlemoyer.
+\newblock Bart: Denoising sequence-to-sequence pre-training for natural
+  language generation, translation, and comprehension.
+\newblock {\em arXiv preprint arXiv:1910.13461}, 2019.
+
+\bibitem{li2023multi}
+H.~Li, D.~Guo, W.~Fan, M.~Xu, and Y.~Song.
+\newblock Multi-step jailbreaking privacy attacks on chatgpt.
+\newblock {\em arXiv preprint arXiv:2304.05197}, 2023.
+
+\bibitem{li2018textbugger}
+J.~Li, S.~Ji, T.~Du, B.~Li, and T.~Wang.
+\newblock Textbugger: Generating adversarial text against real-world
+  applications.
+\newblock {\em arXiv preprint arXiv:1812.05271}, 2018.
+
+\bibitem{li2023defending}
+J.~Li, Z.~Wu, W.~Ping, C.~Xiao, and V.~Vydiswaran.
+\newblock Defending against insertion-based textual backdoor attacks via
+  attribution.
+\newblock {\em arXiv preprint arXiv:2305.02394}, 2023.
+
+\bibitem{li2020bert}
+L.~Li, R.~Ma, Q.~Guo, X.~Xue, and X.~Qiu.
+\newblock Bert-attack: Adversarial attack against bert using bert.
+\newblock {\em arXiv preprint arXiv:2004.09984}, 2020.
+
+\bibitem{li2023learning}
+X.~Li, X.~Li, D.~Pan, Y.~Qiang, and D.~Zhu.
+\newblock Learning compact features via in-training representation alignment.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~37, pages 8675--8683, 2023.
+
+\bibitem{li2021improving}
+X.~Li, X.~Li, D.~Pan, and D.~Zhu.
+\newblock Improving adversarial robustness via probabilistically compact loss
+  with logit constraints.
+\newblock In {\em Proceedings of the AAAI conference on artificial
+  intelligence}, volume~35, pages 8482--8490, 2021.
+
+\bibitem{liu2021makes}
+J.~Liu, D.~Shen, Y.~Zhang, B.~Dolan, L.~Carin, and W.~Chen.
+\newblock What makes good in-context examples for gpt-$3 $?
+\newblock {\em arXiv preprint arXiv:2101.06804}, 2021.
+
+\bibitem{liu2023shortcuts}
+Q.~Liu, F.~Wang, C.~Xiao, and M.~Chen.
+\newblock From shortcuts to triggers: Backdoor defense with denoised poe.
+\newblock {\em arXiv preprint arXiv:2305.14910}, 2023.
+
+\bibitem{liu2020adversarial}
+X.~Liu, H.~Cheng, P.~He, W.~Chen, Y.~Wang, H.~Poon, and J.~Gao.
+\newblock Adversarial training for large neural language models.
+\newblock {\em arXiv preprint arXiv:2004.08994}, 2020.
+
+\bibitem{lu2021fantastically}
+Y.~Lu, M.~Bartolo, A.~Moore, S.~Riedel, and P.~Stenetorp.
+\newblock Fantastically ordered prompts and where to find them: Overcoming
+  few-shot prompt order sensitivity.
+\newblock {\em arXiv preprint arXiv:2104.08786}, 2021.
+
+\bibitem{maus2023black}
+N.~Maus, P.~Chao, E.~Wong, and J.~R. Gardner.
+\newblock Black box adversarial prompting for foundation models.
+\newblock In {\em The Second Workshop on New Frontiers in Adversarial Machine
+  Learning}, 2023.
+
+\bibitem{mehrotra2023tree}
+A.~Mehrotra, M.~Zampetakis, P.~Kassianik, B.~Nelson, H.~Anderson, Y.~Singer,
+  and A.~Karbasi.
+\newblock Tree of attacks: Jailbreaking black-box llms automatically.
+\newblock {\em arXiv preprint arXiv:2312.02119}, 2023.
+
+\bibitem{min2022rethinking}
+S.~Min, X.~Lyu, A.~Holtzman, M.~Artetxe, M.~Lewis, H.~Hajishirzi, and
+  L.~Zettlemoyer.
+\newblock Rethinking the role of demonstrations: What makes in-context learning
+  work?
+\newblock {\em arXiv preprint arXiv:2202.12837}, 2022.
+
+\bibitem{mo2023trustworthy}
+L.~Mo, B.~Wang, M.~Chen, and H.~Sun.
+\newblock How trustworthy are open-source llms? an assessment under malicious
+  demonstrations shows their vulnerabilities.
+\newblock {\em arXiv preprint arXiv:2311.09447}, 2023.
+
+\bibitem{mo2023test}
+W.~Mo, J.~Xu, Q.~Liu, J.~Wang, J.~Yan, C.~Xiao, and M.~Chen.
+\newblock Test-time backdoor mitigation for black-box large language models
+  with defensive demonstrations.
+\newblock {\em arXiv preprint arXiv:2311.09763}, 2023.
+
+\bibitem{morris2020textattack}
+J.~X. Morris, E.~Lifland, J.~Y. Yoo, J.~Grigsby, D.~Jin, and Y.~Qi.
+\newblock Textattack: A framework for adversarial attacks, data augmentation,
+  and adversarial training in nlp.
+\newblock {\em arXiv preprint arXiv:2005.05909}, 2020.
+
+\bibitem{nguyen2023context}
+T.~Nguyen and E.~Wong.
+\newblock In-context example selection with influences.
+\newblock {\em arXiv preprint arXiv:2302.11042}, 2023.
+
+\bibitem{Pang+Lee:05a}
+B.~Pang and L.~Lee.
+\newblock Seeing stars: Exploiting class relationships for sentiment
+  categorization with respect to rating scales.
+\newblock In {\em Proceedings of the ACL}, 2005.
+
+\bibitem{pawelczyk2023context}
+M.~Pawelczyk, S.~Neel, and H.~Lakkaraju.
+\newblock In-context unlearning: Language models as few shot unlearners.
+\newblock {\em arXiv preprint arXiv:2310.07579}, 2023.
+
+\bibitem{perez2022ignore}
+F.~Perez and I.~Ribeiro.
+\newblock Ignore previous prompt: Attack techniques for language models.
+\newblock {\em arXiv preprint arXiv:2211.09527}, 2022.
+
+\bibitem{pezeshkpour2023large}
+P.~Pezeshkpour and E.~Hruschka.
+\newblock Large language models sensitivity to the order of options in
+  multiple-choice questions.
+\newblock {\em arXiv preprint arXiv:2308.11483}, 2023.
+
+\bibitem{qiang2022tiny}
+Y.~Qiang, S.~T.~S. Kumar, M.~Brocanelli, and D.~Zhu.
+\newblock Tiny rnn model with certified robustness for text classification.
+\newblock In {\em 2022 International Joint Conference on Neural Networks
+  (IJCNN)}, pages 1--8. IEEE, 2022.
+
+\bibitem{qiang2023interpretability}
+Y.~Qiang, C.~Li, P.~Khanduri, and D.~Zhu.
+\newblock Interpretability-aware vision transformer.
+\newblock {\em arXiv preprint arXiv:2309.08035}, 2023.
+
+\bibitem{qiang2020toward}
+Y.~Qiang, X.~Li, and D.~Zhu.
+\newblock Toward tag-free aspect based sentiment analysis: A multiple attention
+  network approach.
+\newblock In {\em 2020 International Joint Conference on Neural Networks
+  (IJCNN)}, pages 1--8. IEEE, 2020.
+
+\bibitem{qiang2024prompt}
+Y.~Qiang, S.~Nandi, N.~Mehrabi, G.~V. Steeg, A.~Kumar, A.~Rumshisky, and
+  A.~Galstyan.
+\newblock Prompt perturbation consistency learning for robust language models.
+\newblock {\em arXiv preprint arXiv:2402.15833}, 2024.
+
+\bibitem{radford2019language}
+A.~Radford, J.~Wu, R.~Child, D.~Luan, D.~Amodei, I.~Sutskever, et~al.
+\newblock Language models are unsupervised multitask learners.
+\newblock {\em OpenAI blog}, 1(8):9, 2019.
+
+\bibitem{razeghi2022impact}
+Y.~Razeghi, R.~L. Logan~IV, M.~Gardner, and S.~Singh.
+\newblock Impact of pretraining term frequencies on few-shot reasoning.
+\newblock {\em arXiv preprint arXiv:2202.07206}, 2022.
+
+\bibitem{rubin2021learning}
+O.~Rubin, J.~Herzig, and J.~Berant.
+\newblock Learning to retrieve prompts for in-context learning.
+\newblock {\em arXiv preprint arXiv:2112.08633}, 2021.
+
+\bibitem{schaeffer2023emergent}
+R.~Schaeffer, B.~Miranda, and S.~Koyejo.
+\newblock Are emergent abilities of large language models a mirage?
+\newblock {\em arXiv preprint arXiv:2304.15004}, 2023.
+
+\bibitem{schwarzschild2024rethinking}
+A.~Schwarzschild, Z.~Feng, P.~Maini, Z.~C. Lipton, and J.~Z. Kolter.
+\newblock Rethinking llm memorization through the lens of adversarial
+  compression.
+\newblock {\em arXiv preprint arXiv:2404.15146}, 2024.
+
+\bibitem{shayegani2023survey}
+E.~Shayegani, M.~A.~A. Mamun, Y.~Fu, P.~Zaree, Y.~Dong, and N.~Abu-Ghazaleh.
+\newblock Survey of vulnerabilities in large language models revealed by
+  adversarial attacks.
+\newblock {\em arXiv preprint arXiv:2310.10844}, 2023.
+
+\bibitem{shen2023anything}
+X.~Shen, Z.~Chen, M.~Backes, Y.~Shen, and Y.~Zhang.
+\newblock " do anything now": Characterizing and evaluating in-the-wild
+  jailbreak prompts on large language models.
+\newblock {\em arXiv preprint arXiv:2308.03825}, 2023.
+
+\bibitem{shin2020autoprompt}
+T.~Shin, Y.~Razeghi, R.~L. Logan~IV, E.~Wallace, and S.~Singh.
+\newblock Autoprompt: Eliciting knowledge from language models with
+  automatically generated prompts.
+\newblock {\em arXiv preprint arXiv:2010.15980}, 2020.
+
+\bibitem{socher2013recursive}
+R.~Socher, A.~Perelygin, J.~Wu, J.~Chuang, C.~D. Manning, A.~Y. Ng, and
+  C.~Potts.
+\newblock Recursive deep models for semantic compositionality over a sentiment
+  treebank.
+\newblock In {\em Proceedings of the 2013 conference on empirical methods in
+  natural language processing}, pages 1631--1642, 2013.
+
+\bibitem{studnia2023evaluating}
+J.~Studnia, S.~Zuo, X.~Liu, Q.~Lou, J.~Jiao, and D.~Charles.
+\newblock Evaluating adversarial defense in the era of large language models.
+\newblock In {\em R0-FoMo: Robustness of Few-shot and Zero-shot Learning in
+  Large Foundation Models}, 2023.
+
+\bibitem{touvron2023llama}
+H.~Touvron, T.~Lavril, G.~Izacard, X.~Martinet, M.-A. Lachaux, T.~Lacroix,
+  B.~Rozi{\`e}re, N.~Goyal, E.~Hambro, F.~Azhar, et~al.
+\newblock Llama: Open and efficient foundation language models.
+\newblock {\em arXiv preprint arXiv:2302.13971}, 2023.
+
+\bibitem{wang2023large}
+H.~Wang, G.~Ma, C.~Yu, N.~Gui, L.~Zhang, Z.~Huang, S.~Ma, Y.~Chang, S.~Zhang,
+  L.~Shen, et~al.
+\newblock Are large language models really robust to word-level perturbations?
+\newblock {\em arXiv preprint arXiv:2309.11166}, 2023.
+
+\bibitem{wang2023robustness}
+J.~Wang, X.~Hu, W.~Hou, H.~Chen, R.~Zheng, Y.~Wang, L.~Yang, H.~Huang, W.~Ye,
+  X.~Geng, et~al.
+\newblock On the robustness of chatgpt: An adversarial and out-of-distribution
+  perspective.
+\newblock {\em arXiv preprint arXiv:2302.12095}, 2023.
+
+\bibitem{wang2024mitigating}
+J.~Wang, J.~Li, Y.~Li, X.~Qi, M.~Chen, J.~Hu, Y.~Li, B.~Li, and C.~Xiao.
+\newblock Mitigating fine-tuning jailbreak attack with backdoor enhanced
+  alignment.
+\newblock {\em arXiv preprint arXiv:2402.14968}, 2024.
+
+\bibitem{wang2023adversarial}
+J.~Wang, Z.~Liu, K.~H. Park, M.~Chen, and C.~Xiao.
+\newblock Adversarial demonstration attacks on large language models.
+\newblock {\em arXiv preprint arXiv:2305.14950}, 2023.
+
+\bibitem{wei2022emergent}
+J.~Wei, Y.~Tay, R.~Bommasani, C.~Raffel, B.~Zoph, S.~Borgeaud, D.~Yogatama,
+  M.~Bosma, D.~Zhou, D.~Metzler, et~al.
+\newblock Emergent abilities of large language models.
+\newblock {\em arXiv preprint arXiv:2206.07682}, 2022.
+
+\bibitem{wei2023larger}
+J.~Wei, J.~Wei, Y.~Tay, D.~Tran, A.~Webson, Y.~Lu, X.~Chen, H.~Liu, D.~Huang,
+  D.~Zhou, et~al.
+\newblock Larger language models do in-context learning differently.
+\newblock {\em arXiv preprint arXiv:2303.03846}, 2023.
+
+\bibitem{wei2023jailbreak}
+Z.~Wei, Y.~Wang, and Y.~Wang.
+\newblock Jailbreak and guard aligned language models with only few in-context
+  demonstrations.
+\newblock {\em arXiv preprint arXiv:2310.06387}, 2023.
+
+\bibitem{wen2023hard}
+Y.~Wen, N.~Jain, J.~Kirchenbauer, M.~Goldblum, J.~Geiping, and T.~Goldstein.
+\newblock Hard prompts made easy: Gradient-based discrete optimization for
+  prompt tuning and discovery.
+\newblock {\em arXiv preprint arXiv:2302.03668}, 2023.
+
+\bibitem{wen2024hard}
+Y.~Wen, N.~Jain, J.~Kirchenbauer, M.~Goldblum, J.~Geiping, and T.~Goldstein.
+\newblock Hard prompts made easy: Gradient-based discrete optimization for
+  prompt tuning and discovery.
+\newblock {\em Advances in Neural Information Processing Systems}, 36, 2024.
+
+\bibitem{wu2024new}
+F.~Wu, N.~Zhang, S.~Jha, P.~McDaniel, and C.~Xiao.
+\newblock A new era in llm security: Exploring security concerns in real-world
+  llm-based systems.
+\newblock {\em arXiv preprint arXiv:2402.18649}, 2024.
+
+\bibitem{wu2022self}
+Z.~Wu, Y.~Wang, J.~Ye, and L.~Kong.
+\newblock Self-adaptive in-context learning.
+\newblock {\em arXiv preprint arXiv:2212.10375}, 2022.
+
+\bibitem{xie2021explanation}
+S.~M. Xie, A.~Raghunathan, P.~Liang, and T.~Ma.
+\newblock An explanation of in-context learning as implicit bayesian inference.
+\newblock {\em arXiv preprint arXiv:2111.02080}, 2021.
+
+\bibitem{xu2023instructions}
+J.~Xu, M.~D. Ma, F.~Wang, C.~Xiao, and M.~Chen.
+\newblock Instructions as backdoors: Backdoor vulnerabilities of instruction
+  tuning for large language models.
+\newblock {\em arXiv preprint arXiv:2305.14710}, 2023.
+
+\bibitem{xu2024llm}
+Z.~Xu, Y.~Liu, G.~Deng, Y.~Li, and S.~Picek.
+\newblock Llm jailbreak attack versus defense techniques--a comprehensive
+  study.
+\newblock {\em arXiv preprint arXiv:2402.13457}, 2024.
+
+\bibitem{yu2024don}
+Z.~Yu, X.~Liu, S.~Liang, Z.~Cameron, C.~Xiao, and N.~Zhang.
+\newblock Don't listen to me: Understanding and exploring jailbreak prompts of
+  large language models.
+\newblock {\em arXiv preprint arXiv:2403.17336}, 2024.
+
+\bibitem{yuan2024rigorllm}
+Z.~Yuan, Z.~Xiong, Y.~Zeng, N.~Yu, R.~Jia, D.~Song, and B.~Li.
+\newblock Rigorllm: Resilient guardrails for large language models against
+  undesired content.
+\newblock {\em arXiv preprint arXiv:2403.13031}, 2024.
+
+\bibitem{zhang2022opt}
+S.~Zhang, S.~Roller, N.~Goyal, M.~Artetxe, M.~Chen, S.~Chen, C.~Dewan, M.~Diab,
+  X.~Li, X.~V. Lin, T.~Mihaylov, M.~Ott, S.~Shleifer, K.~Shuster, D.~Simig,
+  P.~S. Koura, A.~Sridhar, T.~Wang, and L.~Zettlemoyer.
+\newblock Opt: Open pre-trained transformer language models, 2022.
+
+\bibitem{Zhang2015CharacterlevelCN}
+X.~Zhang, J.~J. Zhao, and Y.~LeCun.
+\newblock Character-level convolutional networks for text classification.
+\newblock In {\em NIPS}, 2015.
+
+\bibitem{zhao2024universal}
+S.~Zhao, M.~Jia, L.~A. Tuan, and J.~Wen.
+\newblock Universal vulnerabilities in large language models: In-context
+  learning backdoor attacks.
+\newblock {\em arXiv preprint arXiv:2401.05949}, 2024.
+
+\bibitem{zhao2021calibrate}
+Z.~Zhao, E.~Wallace, S.~Feng, D.~Klein, and S.~Singh.
+\newblock Calibrate before use: Improving few-shot performance of language
+  models.
+\newblock In {\em International Conference on Machine Learning}, pages
+  12697--12706. PMLR, 2021.
+
+\bibitem{zhu2023promptbench}
+K.~Zhu, J.~Wang, J.~Zhou, Z.~Wang, H.~Chen, Y.~Wang, L.~Yang, W.~Ye, N.~Z.
+  Gong, Y.~Zhang, et~al.
+\newblock Promptbench: Towards evaluating the robustness of large language
+  models on adversarial prompts.
+\newblock {\em arXiv preprint arXiv:2306.04528}, 2023.
+
+\bibitem{zhu2023autodan}
+S.~Zhu, R.~Zhang, B.~An, G.~Wu, J.~Barrow, Z.~Wang, F.~Huang, A.~Nenkova, and
+  T.~Sun.
+\newblock Autodan: Automatic and interpretable adversarial attacks on large
+  language models.
+\newblock {\em arXiv preprint arXiv:2310.15140}, 2023.
+
+\bibitem{zou2023universal}
+A.~Zou, Z.~Wang, J.~Z. Kolter, and M.~Fredrikson.
+\newblock Universal and transferable adversarial attacks on aligned language
+  models.
+\newblock {\em arXiv preprint arXiv:2307.15043}, 2023.
+
+\end{thebibliography}
