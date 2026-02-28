@@ -1,7 +1,46 @@
-\section{The Defense Method} 
-\label{chap:defense}
+\section{Discussion}
 
-Having developed the ICL hijacking attack by incorporating adversarial tokens into the in-context demos, we now present a straightforward yet potent defense strategy to counter this attack. Initially, we assume that defenders treat LLMs as black-box, lacking any insight into their training processes or underlying parameters. The defenders apply defense on the input prompt $p$ directly during test-time evaluation. Their goal is to rectify the behavior of LLMs and induce LLMs to generate desired responses to user queries. 
+This chapter interprets the empirical findings presented in Chapter 4 and examines the implications of using generative large language models (LLMs) for COVID-19 severity risk prediction. The discussion focuses on how LLMs behave under different training conditions, how serialization formats influence model performance, how LLMs compare with traditional machine learning (ML) baselines, and how these behaviors translate into practical value for conversational health-assessment systems.
 
-Given an input prompt $p^\prime$ that includes adversarial tokens within the demos $C^\prime$, we assume that LLMs, when presented with demos containing clean data for the same tasks, can understand the genuine intent of the user's query through ICL, rather than being misled by the adversarial demos. In this context, `clean data' refers to data without any adversarial tokens and is randomly selected from the training set. More precisely, the defenders modify the input prompt $p^\prime$ into $\Tilde{p}$ by appending or inserting more clean demos into the demo set $C^\prime$, as follows: $\Tilde{p} = [I; C^\prime; \Tilde{C}; S(x_Q,\_)]$. $\Tilde{C} = [S(\Tilde{x}_1, \Tilde{y}_1);\  \cdots; \ S(\Tilde{x}_N, \Tilde{y}_N)]$ here denotes the clean demos selected from the training set. Through this approach, the defender guarantees that the in-context demos align with the user's query and possess resilience against adversarial attacks. 
-In our experiments, we maintained an equal number of demos in $C^\prime$ and $\Tilde{C}$ and observed that this method resulted in effective defense across a range of datasets and tasks. 
+\subsection{LLM Effectiveness in Low-Data Settings}
+A central outcome of this work is that fine-tuned LLMs can reach or exceed the performance of strong ML baselines such as logistic regression, random forest, and XGBoost. The improvement appears after only a small number of training shots, demonstrating that LLMs can adapt rapidly to structured clinical prediction tasks even when labeled data are limited.
+
+This behavior reflects the pretraining characteristics of the evaluated models. Although the fine-tuning dataset is modest, the models already contain broad representations of symptoms, comorbidities, and risk-related language acquired during large-scale pretraining. Fine-tuning aligns these representations with the risk prediction task by providing a small number of concrete examples in either list- or text-serialized form.
+
+This data efficiency is particularly important in clinical informatics, where high-quality labeled datasets are expensive and slow to obtain. The ability to achieve strong performance with minimal supervision suggests that fine-tuned generative models can serve as effective classifiers in early-stage deployment scenarios or in emerging diseases where labeled data are scarce.
+
+\subsection{Zero-Shot Reasoning and Its Limitations}
+Zero-shot performance establishes a baseline for what pretrained LLMs can accomplish without any tuning. In the experiments, zero-shot models produce meaningful predictions in some cases, indicating that general medical and symptom-related knowledge is embedded in their pretrained representations.
+
+However, zero-shot behavior is also highly variable. Certain models perform near ML baselines, while others behave inconsistently or show signs of miscalibration. This reflects the fact that LLMs are not explicitly trained for structured classification tasks and may interpret serialized inputs in unpredictable ways without task-aligned examples.
+
+These findings reinforce an important practical insight: zero-shot models are useful for exploration and prototyping, but not reliable enough for deployment in health-critical settings. Few-shot fine-tuning serves as a necessary bridge between broadly trained models and clinically meaningful behavior.
+
+\subsection{Impact of Serialization Format}
+Serialization plays a decisive role in shaping LLM behavior. The experiments compare two formats: list serialization (-L) and text serialization (-T) which differ in structure, verbosity, and how they expose clinical features to the model.
+
+List serialization presents each feature-value pair clearly and unambiguously. This format tends to produce more stable improvements at low shot counts because the information is expressed in discrete items that mirror the structure of the dataset. Text serialization embeds features in narrative form and is closer to standard natural-language inputs. While certain models benefit from this structure at higher shot counts, text serialization can introduce additional syntactic complexity that may obscure key risk indicators.
+
+The observed differences confirm that the way structured data are verbalized directly affects model reasoning. Thoughtful prompt and template design is therefore not merely an aesthetic choice; it is an essential modeling decision that materially influences prediction quality.
+
+\subsection{Comparing LLMs With Traditional ML Models}
+Although traditional ML classifiers offer strong performance and well-established interpretability mechanisms, LLMs provide several practical advantages. First, LLMs continue improving as additional shots are introduced, eventually surpassing all ML baselines under the best configurations. Second, they produce both probability estimates and natural-language explanations, giving end users insight into the reasoning behind risk predictions, something ML baselines do not inherently provide.
+
+Attention-based explanations extracted from the fine-tuned models (discussed in Chapter 4) show that LLMs tend to highlight clinically relevant features such as age, symptom severity, and chronic disease profiles. While attention is not a causal measure, its patterns align with established risk factors frequently reported in health literature and clinical guidelines, including studies referenced in the literature such as Chen et al. and XGBoost's original formulation \cite{chen2016xgboost}.
+
+The combined predictive and explanatory ability positions LLMs as compelling alternatives to conventional ML systems in interactive clinical settings.
+
+\subsection{Implications for Conversational Health-Assessment Systems}
+The LLM-driven assessment pipeline enables dynamic, conversational interaction. Instead of relying solely on static feature vectors, the system is designed to enable the model to generate risk predictions and explanations based on the collected information. This integration of prediction and interaction is essential for patient-facing mobile applications.
+
+The ability to fine-tune LLMs with only a handful of examples also makes the system adaptable to new populations, updates in disease definitions, and evolving symptom patterns. Such adaptability is difficult to achieve with traditional ML workflows, which typically require retraining on large, curated datasets.
+
+Furthermore, because LLM predictions can be paired with explanatory rationales, the system encourages transparency and user trust, key attributes for digital health applications, especially those employed during fast-moving situations such as epidemic outbreaks.
+
+\subsection{Integrative Observations From the Experimental Findings}
+Several broader conclusions arise from the results. First, few-shot fine-tuning is highly effective, with LLMs achieving strong performance after only a small number of annotated examples. Second, zero-shot performance is promising but unstable; while the models contain relevant prior knowledge, they require adaptation to behave reliably. Third, the serialization format matters, as simple, structured formats often outperform narrative ones in low-shot regimes. Furthermore, LLMs provide interpretability not available in standard ML, with explanations and attention maps offering rich, user-aligned reasoning. Finally, conventional ML remains competitive but not superior, as baselines such as logistic regression, random forest, and XGBoost perform well but do not match the most effective LLM configurations.
+
+These insights collectively demonstrate that generative LLMs, when fine-tuned through carefully designed serialized templates, can serve as powerful engines for clinical risk assessment systems.
+
+\subsection{Summary}
+This chapter presented a detailed interpretation of the experimental outcomes and highlighted the practical significance of using LLMs for structured COVID-19 severity prediction. The evidence indicates that generative LLMs combine accuracy, adaptability, and user-friendly explanation mechanisms in a way that traditional ML approaches cannot easily replicate. These findings set the stage for the next chapter, which examines the limitations of the approach and considers how future work may extend and strengthen this line of research.

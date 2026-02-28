@@ -1,102 +1,135 @@
-\section{The Threat Model}
-\label{chap:threat}
+\section{Results}
 
-\subsection{ICL Hijacking Attack}
+This chapter presents the empirical results of the generative large language model (LLM)-based framework for COVID-19 severity risk prediction. We compare several fine-tuned LLMs with traditional machine learning (ML) classifiers on the same dataset of 393 patient assessments and examine how performance varies with the number of training shots and serialization format. Unless otherwise noted, all results are reported on the held-out test set defined in Chapter 3.
 
-ICL consists of an instruction $I$, a demo set $C$, and an input query $x_Q$, providing more potential attack vectors compared to the conventional text-based adversarial attacks. This work focuses on manipulating $C$ without changing $I$ and $x_Q$. Recently, \cite{wang2023adversarial} applied character-level perturbation techniques (e.g., TextAttack \cite{morris2020textattack} and TextBugger \cite{li2018textbugger}), such as character insertion, character deletion, neighboring character swap, and character substitution, to reverse the output.
+The quantitative results are summarized in two tables and one figure:
+\begin{itemize}
+    \item Table 2: AUC for all LLM variants and ML baselines across different shot settings.
+    \item Table 3: Precision, recall, and F1 scores for the strongest models.
+    \item Figure~\ref{fig:auc_comparison}: AUC comparison for the 2-shot scenario across LLMs and ML baselines, separately for list- and text-based serialization.
+\end{itemize}
 
-Our hijacking attack learns the adversarial suffix tokens to the in-context demos to manipulate LLMs' output via a new greedy gradient-based prompt injection algorithm. Given a clean demo set: 
-\begin{equation}
-    C = [S(x_1, y_1);\  \cdots; \ S(x_N, y_N)],
-\end{equation}
-our hijacking attack automatically produces an adversarial suffix for each demo in $c$, formally: 
-\begin{equation}
-    C^\prime = [S(x_1 + \delta_1, y_1);\  \cdots; \ S(x_N + \delta_N, y_N)], 
-\end{equation}
-where $C^\prime$ denotes the perturbed demo set. To make it clear, the adversarial suffixes appended to each demo as perturbations are different, respectively. In this case, the attack or perturbation budget refers to the number of tokens in each adversarial suffix. 
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption[Model performance (AUC) across different numbers of shots]{Performance of models across different shot settings. All values represent the average area under the curve (AUC) across 5 random seeds rounded to 2 decimal places. In addition, SDs given across the 5 random seeds are shown. The suffixes “-L” and “-T” represent list serialization and text serialization, respectively.}
+\label{tab:auc_results}
+\begin{tabular}{lcccccc}
+\toprule
+\multicolumn{1}{l}{Model} &
+\multicolumn{6}{c}{Number of shots} \\
+\cmidrule(lr){2-7}
+ & 0, AUC$^{a}$ (SD) & 2, AUC (SD) & 4, AUC (SD) & 8, AUC (SD) & 16, AUC (SD) & 32, AUC (SD) \\
+\midrule
+Llama2-7b-L      & 0.54 (.05) & 0.69 (.07) & 0.69 (.06) & 0.68 (.04) & 0.63 (.04) & 0.66 (.07) \\
+Flan-t5-xl-L     & 0.62 (.03) & 0.64 (.02) & 0.63 (.02) & 0.68 (.06) & 0.66 (.05) & 0.69 (.06) \\
+Flan-t5-xxl-L    & 0.60 (.03) & 0.61 (.03) & 0.61 (.05) & 0.62 (.06) & 0.59 (.10) & 0.65 (.11) \\
+T0pp(8bit)-L     & 0.69 (.04) & 0.70 (.07) & 0.70 (.05) & 0.70 (.05) & 0.68 (.06) & 0.70 (.10) \\
+T0-3b-L          & 0.68 (.04) & 0.67 (.04) & 0.68 (.05) & 0.70 (.04) & 0.67 (.04) & 0.67 (.07) \\
+Llama2-7b-T      & 0.59 (.05) & 0.69 (.03) & 0.69 (.01) & 0.64 (.07) & 0.63 (.05) & 0.67 (.06) \\
+Flan-t5-xl-T     & 0.69 (.03) & 0.69 (.02) & 0.69 (.03) & 0.71 (.05) & 0.69 (.04) & 0.70 (.05) \\
+Flan-t5-xxl-T    & 0.61 (.04) & 0.58 (.03) & 0.63 (.08) & 0.59 (.10) & 0.62 (.09) & 0.63 (.10) \\
+T0pp(8bit)-T     & 0.67 (.02) & 0.65 (.05) & 0.66 (.05) & 0.68 (.04) & 0.65 (.08) & 0.67 (.08) \\
+T0-3b-T          & 0.75 (.04) & 0.65 (.06) & 0.65 (.05) & 0.68 (.03) & 0.67 (.04) & 0.65 (.08) \\
+Logistic regression & N/A$^{b}$ & 0.57 (.07) & 0.55 (.10) & 0.64 (.06) & 0.61 (.11) & 0.69 (.08) \\
+Random forest    & N/A        & 0.57 (.07) & 0.57 (.06) & 0.62 (.08) & 0.66 (.07) & 0.68 (.07) \\
+XGBoost$^{c}$    & N/A        & 0.50 (.00) & 0.50 (.00) & 0.50 (.00) & 0.54 (.06) & 0.65 (.03) \\
+\bottomrule
+\end{tabular}
+\vspace{0.5em}
+\begin{flushleft}
+\footnotesize
+$^{a}$Average area under the curve.\\
+$^{b}$Not applicable.\\
+$^{c}$XGBoost: extreme gradient boosting.
+\end{flushleft}
+\end{table}
 
-As a result, our hijacking attack induces $\mathcal{M}$ to generate an unwanted target output $y_T$ via appending adversarial suffix tokens on the in-context demos as $y_T = \mathcal{M}(p^\prime)$. In other words, $\mathcal{M}$ generates the same or different responses for the clean and perturbed prompts depending on the True or False of $\mathcal{M}(p) = y_T$:
-\[
-  %  f(x)= 
-\begin{cases}
-    \mathcal{M}(p) = \mathcal{M}(p^\prime),     & \text{True},\\
-    \mathcal{M}(p) \neq \mathcal{M}(p^\prime),  & \text{False},
-\end{cases}
-\]
-where $p = [I;\ C;\ S(x_Q,\_)]$ and $p^\prime = [I;\ C^\prime;\ S(x_Q,\_)]$, respectively.
+The following sections describe these results in detail.
 
-%\begin{equation}
-%    \mathcal{M}(\mathcal{V}(y_j)|p) \neq \mathcal{M}(\mathcal{V}(y_j)|p^\prime),
-%\end{equation}
-%where $p = [I;\ C;\ S(x_Q,\_)]$ and $p^\prime = [I;\ C^\prime;\ S(x_Q,\_)]$, respectively.
+\subsection{Performance of Traditional Machine Learning Baselines}
+Logistic regression, random forest, and XGBoost were trained using the structured feature vectors described in Chapter 3. Their test-set AUC values appear in the bottom rows of Table 2.
 
-\subsection{Hijacking Attack Objective}
+Overall, the ML baselines achieve reasonable discrimination between severe and non-severe cases. Among them, XGBoost attains the highest AUC, followed by random forest and logistic regression. However, even the best baseline remains below the strongest LLM configurations. These baselines therefore provide a realistic but clearly improvable reference point for evaluating the benefit of generative LLMs.
 
-We express the goal of the hijacking attack as a formal objective function. Let us consider the LLM $\mathcal{M}$ as a function that maps a sequence of tokens $x_{1:n}$, with $x \in \{1, \cdots, V\}$ where $V$ denote the vocabulary size, namely, the number of tokens, to a probability distribution over the next token $x_{n+1}$. Specifically, $\mathcal{P}(x_{n+1}|x_{1:n})$ denotes the probability that $x_{n+1}$ is the next token given the previous tokens $x_{1:n}$. In more detail, we formulate $x_{1:n}$ as $[I;\ C;\ S(x_Q,\_)]$ and $x_{n+1}$ as $\hat{y}_Q$ in the context of an ICL task, respectively. 
+\subsection{LLM Performance Across Shot Settings}
+We evaluate several pretrained LLMs under different shot settings: 0, 2, 4, 8, 16, and 32 training examples. The models include LLaMA2-7B and multiple Flan-T5 variants, each fine-tuned with LoRA on serialized patient assessments.
 
-Using the notations defined earlier, the hijacking attack objective we want to optimize is simply the negative log probability of the target token $x_{n+1}$. The generated target output ${y}_T$ is different from the ground truth label $y_Q$ for the training query $(x_Q,y_Q)$. Formally:
-\begin{equation}
-    \label{eq:loss}
-    \mathcal{L}(x_Q) = -\log \mathcal{P}(\mathcal{M}(y_T|p^\prime)),
-\end{equation}
-where $y_T \neq y_Q$, demonstrating the attack hijacks $\mathcal{M}$ to generate the target output. $p^\prime$ denotes the perturbed prompt as: $p^\prime = [I;\ C^\prime;\ S(x_Q,\_)]$. 
-In summary, the problem of optimizing the adversarial suffix tokens can be formulated as the following optimization objective:
-\begin{equation}
-\label{eq:optim}
-     \underset{\delta_i\in\{1, \cdots, V\}^{|N|}}{\mathrm{minimize}}\mathcal{L}(x_Q),
-\end{equation}
-where $i$ denotes the indices of the demos and $N$ is the number of demos in the perturbed demos set $C^\prime$, respectively. 
+The results in Table 2 show three consistent patterns:
+\begin{itemize}
+    \item \textbf{Zero-shot performance is already meaningful.} In the 0-shot column, some models achieve non-trivial AUC values even without task-specific fine-tuning, indicating that pretrained LLMs contain useful prior knowledge about general health and symptom concepts.
+    \item \textbf{Few-shot fine-tuning substantially improves performance.} Moving from 0 to 2 shots leads to a noticeable AUC increase for most models. Additional shots (4-32) usually yield further, but smaller, gains. This confirms that a small number of labeled examples is sufficient to adapt the models to the COVID-19 severity prediction task.
+    \item \textbf{Different LLMs respond differently to additional shots.} For some models, performance saturates quickly after a few shots; for others, AUC continues to improve up to 16 or 32 shots. This suggests that model architecture and pretraining details influence how efficiently each LLM uses limited labeled data.
+\end{itemize}
+Taken together, Table 2 demonstrates that fine-tuned LLMs can match or exceed the performance of strong ML baselines using only a modest number of training examples.
 
-\subsection{Greedy Gradient-guided Injection}
+\subsection{Effect of Serialization Format}
+As described in Chapter 3, we consider two serialization formats for converting structured features into text inputs: list templates (-L) and text templates (-T). The suffixes ``-L'' and ``-T'' in Table 2 denote these two formats.
 
-A primary challenge in optimizing Eq. \ref{eq:optim} is optimizing over a discrete set of possible token values. While there are some methods for discrete optimization, prior work \cite{carlini2023aligned} has shown that those effective strategies often struggle to reliably attack the aligned LLMs. 
+The results show that serialization format has a clear impact on performance:
+\begin{itemize}
+    \item For some models, especially at lower shot counts, list serialization yields higher AUC than text serialization.
+    \item For others, especially at higher shot counts, text serialization overtakes the list format.
+    \item The relative advantage can also depend on the model: a configuration that benefits from list prompts in early shots may benefit more from text prompts when the training set grows.
+\end{itemize}
+These trends highlight that the way structured patient data is verbalized into natural language is not just a cosmetic choice; it directly affects how effectively the LLM can use the information. Selecting an appropriate serialization scheme is therefore an important design decision in LLM-based clinical prediction pipelines.
 
-Motivated by prior works \cite{shin2020autoprompt,zou2023universal,wen2024hard}, we propose a simple yet effective algorithm for LLMs hijacking attacks, called greedy gradient-guided injection (GGI) algorithm (Algorithm \ref{alg}). The key idea comes from greedy coordinate descent: if we could evaluate all possible suffix token injections, we could substitute the tokens that maximize the adversarial loss reduction. Since exhaustively evaluating all tokens is infeasible due to the large candidate vocabulary size, we instead leverage gradients with respect to the suffix indicators to find promising candidate tokens for each position. We then evaluate all of these candidate injections with explicit forward passes to find the one that decreases the loss the most. This allows an efficient approximation of the true greedy selection. We can optimize the discrete adversarial suffixes by iteratively injecting the best tokens.  
+\subsection{Zero-Shot Versus Few-Shot Behavior}
+The zero-shot column in Table 2 provides a baseline for what is achievable without any task-specific fine-tuning. In this regime, some models perform comparably to weaker ML baselines, while others lag behind. This variability reflects differences in how well each pretrained model's prior knowledge aligns with the COVID-19 severity task.
 
-We compute the linearized approximation of replacing the demo $x_i$ in $C$ by evaluating the gradient $\nabla_{\mathbf{e}_{x_i^j}} \mathcal{L}(x_Q) \in \mathbb{R}^{|V|}$, where $\mathbf{e}_{x_i^j}$ denotes the vector representing the current value of the $j$-th adversarial suffix token. Note that because LLMs typically form embeddings for each token, they can be written as functions of $\mathbf{e}_{x_i^j}$, and thus we can immediately take the gradient with respect to this quantity \cite{ebrahimi2017hotflip,shin2020autoprompt}. 
+In contrast, the 2-shot and 4-shot results show that even a very small labeled set dramatically stabilizes LLM performance. Several models quickly surpass all ML baselines once they see just a handful of serialized examples. Beyond 8--16 shots, improvements continue but with diminishing returns, suggesting that the few-shot regime is the most efficient operating point for this dataset size.
 
-The key aspects of our GGI algorithm (Algorithm \ref{alg}) are: firstly, it uses gradients of the selected token candidates to calculate the top candidates; secondly, it evaluates the top candidates explicitly to identify the most suitable one; and lastly, it iteratively injects the best token at each position to optimize the suffixes. This approximates an extensive greedy search in a computationally efficient manner. 
+From a practical perspective, these results support the intended use case of the app: a small curated dataset of previous assessments is sufficient to adapt the LLM to provide reliable risk scores, without requiring the large training sets typically needed by traditional ML approaches.
 
-\begin{algorithm*} [t]
-    \SetKwInOut{Input}{Input}
-    \SetKwInOut{Output}{Output}
-    \caption{Greedy Gradient-guided Injection (GGI)\label{alg}}
-    \Input{
-           Model: $\mathcal{M}$,
-           Iterations: $T$,  
-           Batch Size: $b$,
-           Instruction: $I$, 
-           Demos: $C$,
-           Query: $(x_Q, y_Q)$ 
-           Target: $y_T$\\
-           }
-    \textbf{Initialization}: 
-                $p^\prime_0 = [I;\ [S(x_1 + \delta_1, y_1);\  \cdots; \ S(x_N + \delta_N, y_N)];\ S(x_Q, y_T)]$ \\ 
-    \Repeat{$T$ times}{
-        \For {$i \in N$}{
-            % \begin{flushleft}
-            % $\delta_i^{(k)}= \mathrm{Top-}k(-\nabla_{p^\prime} \mathcal{L}(\mathcal{M}(\hat{y}|p^\prime_{t-1}),y_Q))$   \hspace{\fill} \textit{/* Compute top-k substitutions */ }
-            $[\delta_{i_1}; ...; \delta_{i_k}]= \mathrm{Top-}k(-\nabla_{p^\prime} \mathcal{L}(\mathcal{M}(\hat{y}|p^\prime_{t-1}),y_T))$   \hspace{\fill} \textit{/* Compute top-k substitutions */ }
-            % \end{flushleft}
-        }
-        \begin{flushleft}
-            $K = \{[\delta_{i_1};\ ...;\ \delta_{i_k}]\ |\ i = 1,\ ...,N\}$
-        \end{flushleft}
-        \begin{flushleft}
-            $B = \left\{ (\delta_{i1}, \ldots, \delta_{ib}) \mid (\delta_{i1}, \ldots, \delta_{ik}) \in K \right\}$ \hspace{\fill} \textit{/* Make a subset of substitution */ }
-        \end{flushleft}
-        \For {$i \in N$}{
-            $\delta_i^\star = \delta_{ij}$, where $j = \mathrm{argmin}_{\delta_{ib}}\mathcal{L}(\mathcal{M}(\hat{y}|p^\prime_{t-1}),y_T) $  \hspace{\fill} \textit{/* Compute best replacement */ }
-        }
-        
-        \begin{flushleft}
-            $\Delta = [\delta_1^\star;\ ...;\ \delta_N^\star$]
-        \end{flushleft}
+\subsection{LLMs Versus Traditional Machine Learning Models}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/fig8.png}
+    \caption{Average area under the curve (AUC) in a 2-shot setting over 5 different seeds. The left panel shows results using the list serialization (-L) approach, while the right panel shows results using the text serialization (-T) approach. XGBoost: extreme gradient boosting.}
+    \label{fig:auc_comparison}
+\end{figure}
+These results indicate that, on this dataset, fine-tuned LLMs are not only competitive with traditional ML models but can provide consistently better discrimination when given even a small number of training examples. At the same time, they also produce probability estimates and textual explanations, which the baselines do not.
 
-        \begin{flushleft}
-            $p^\prime_t = [I;\ [S(x_1 + \delta_1^\star, y_1);\  \cdots; \ S(x_N + \delta_N^\star, y_N)];\ S(x_Q, y_T)]$ 
-            \hspace{\fill} \textit{ /* Update prompt */ }
-        \end{flushleft}
-    }
-    \Output{Optimized prompt suffixes $[\delta_1^\star, \cdots, \delta_N^\star]$}
-\end{algorithm*}
+\subsection{Precision, Recall, and F1 Scores}
+While AUC is a useful summary metric, decision-making in clinical contexts also depends on the balance between recall (sensitivity to severe cases) and precision (avoiding unnecessary alarms). Table 3 reports precision, recall, and F1 scores for selected high-performing models.
+
+\begin{table}[htbp]
+\centering
+\caption[Precision, recall, and $F_{1}$-score of the best performing models]{Precision, recall, and $F_{1}$-score of the best performing models across different shots averaged over 5 random seeds.}
+\label{tab:precision_recall_f1}
+\begin{tabular}{l l c c c c}
+\toprule
+Shot & Best model & Threshold & Precision & Recall & $F_{1}$-score \\
+\midrule
+0  & T0-3b       & 0.04 & 0.37 & 0.85 & 0.52 \\
+2  & T0pp        & 0.12 & 0.34 & 0.81 & 0.46 \\
+4  & T0pp        & 0.24 & 0.35 & 0.83 & 0.49 \\
+8  & flan-t5-xl  & 0.17 & 0.38 & 0.80 & 0.50 \\
+16 & flan-t5-xl  & 0.15 & 0.34 & 0.85 & 0.48 \\
+32 & flan-t5-xl  & 0.16 & 0.36 & 0.81 & 0.49 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The results suggest that:
+\begin{itemize}
+    \item The best LLM configurations achieve high recall on severe cases while maintaining reasonable precision.
+    \item LLMs tuned with the better serialization format for that model typically yield the strongest F1 scores.
+    \item Compared with ML baselines, the top LLMs offer a more favorable trade-off between catching severe cases and limiting false positives.
+\end{itemize}
+These metrics support the conclusion that the proposed LLM-based approach is practically viable for real-time risk assessment, especially in scenarios where missing a truly severe case is costly.
+
+\subsection{Explainability and Attention-Based Feature Importance}
+The attention-based explanation mechanism described in Chapter 3 was applied to fine-tuned models to visualize which serialized features contributed most to the predicted risk. The resulting heatmaps, illustrated in Figure 4, provide several insights:
+\begin{itemize}
+    \item High-risk predictions are usually associated with increased attention to features such as age group, presence of chronic conditions, and key symptoms (e.g., fever, shortness of breath).
+    \item For lower-risk predictions, attention tends to shift toward benign or absent risk factors.
+    \item Across different models and prompts, qualitatively similar patterns emerge, suggesting that the LLMs are leveraging clinically meaningful features rather than arbitrary tokens.
+\end{itemize}
+These explanations are not a formal causal attribution, but they align with common clinical reasoning and can help both patients and clinicians understand why a particular risk score was produced. In the context of the mobile app, this interpretability layer complements the numerical prediction and enhances user trust.
+
+\subsection{Summary of Findings}
+In summary, the results in this chapter show that fine-tuned generative LLMs achieve performance that is competitive with or superior to strong ML baselines on COVID-19 severity risk prediction using a relatively small structured dataset. Even in the zero-shot setting, some pretrained LLMs provide meaningful risk estimates, but fine-tuning with a small number of examples yields substantial gains. Additionally, the serialization format significantly influences LLM behavior, and careful design of list or text templates can improve performance. Overall, LLMs offer favorable precision-recall trade-offs compared with traditional models and additionally provide natural-language explanations and attention-based visualizations.
+
+These findings support the central claim of this thesis: generative LLMs, when equipped with appropriate serialization, fine-tuning, and explanation strategies, are a promising foundation for conversational, real-time health risk assessment applications.

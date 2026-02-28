@@ -3,9 +3,11 @@
 
 % Add reference to the table of contents {toc} at the section level {section} titled "Abstract" {Abstract}
 \addcontentsline{toc}{section}{Abstract}
-\centerline{\bf HIJACKING LARGE LANGUAGE MODELS VIA}
+\centerline{\bf GENERATIVE LARGE LANGUAGE MODEL-POWERED}
 \vspace{-0.4cm}
-\centerline{\bf ADVERSARIAL IN-CONTEXT LEARNING}
+\centerline{\bf CONVERSATIONAL AI APP FOR PERSONALIZED RISK ASSESSMENT:}
+\vspace{-0.4cm}
+\centerline{\bf CASE STUDY IN COVID-19}
 % \vspace{-0.4cm}
 % \centerline{\bf TITLE LINE 3 (if needed)}
 
@@ -13,9 +15,9 @@
 	\begin{center}
 	by\\
 	\medskip
-	{\bf YAO QIANG}\\
+	{\bf MOHAMMAD AMIN ROSHANI}\\
 	\medskip
-	{\bf August 2024}\\
+	{\bf December 2025}\\
 	\end{center}
 	\Vspc
 	\begin{tabular}{ll}
@@ -27,6 +29,10 @@
 
 \bigskip \bigskip
 
-In-context learning (ICL) has emerged as a powerful paradigm leveraging LLMs for specific downstream tasks by utilizing labeled examples as demonstrations in the precondition prompts. Despite its promising performance, ICL suffers from instability with the choice and arrangement of examples. Additionally, crafted adversarial attacks pose a notable threat to the robustness of ICL. However, existing attacks are either easy to detect, rely on external models, or lack specificity towards ICL. 
+Accurate prediction of COVID-19 severity risk remains an essential challenge for supporting timely intervention, resource planning, and personalized patient guidance. Traditional machine learning models have been useful in structured clinical prediction tasks, but they depend on curated datasets and do not provide explanations or interactive capabilities for users. Recent advances in large language models open new possibilities for combining predictive modeling with real-time conversational assessment.
 
-This thesis introduces a novel transferable attack for ICL to address these issues, aiming to hijack LLMs to generate the targeted response. The proposed hijacking attack leverages a gradient-based prompt search method to learn and append imperceptible adversarial suffixes to the in-context demonstrations. Extensive experimental results on various tasks and datasets demonstrate the effectiveness of our hijacking attack, resulting in distracted attention towards adversarial tokens and consequently leading to unwanted target outputs. We also propose a defense strategy against hijacking attacks through the use of extra demonstrations, which enhances the robustness of LLMs during ICL. Broadly, this work reveals the significant security vulnerabilities of LLMs and emphasizes the necessity for in-depth studies on the robustness of LLMs related to ICL.
+This thesis investigates the use of generative large language models for COVID-19 severity prediction using structured symptom, demographic, and comorbidity information collected through a mobile self-assessment system. The thesis examines how prompt serialization formats, few-shot fine-tuning strategies, and model architectures influence predictive performance. The experimental framework evaluates several language models, including Flan-T5 variants, T0 models, and Llama 2, and compares them with traditional classifiers such as logistic regression, random forest, and XGBoost. The study incorporates probability-based classification, attention-driven interpretability, and an end-to-end conversational inference pipeline.
+
+The results show that fine-tuned language models consistently perform at the level of or better than traditional machine learning baselines, even when only a small number of examples are available. List-based serialization provides stable improvements in settings with very few examples, while text-based serialization improves as more demonstrations are introduced. The fine-tuned models also provide natural language explanations and highlight clinically meaningful feature patterns through attention mechanisms. These capabilities enable forms of clarity and transparency that standard classifiers cannot provide. In a conversational application, the system is able to gather missing information, guide users through the assessment, and communicate personalized risk estimates.
+
+The thesis concludes that generative language models offer a practical and data-efficient approach for digital health risk assessment. They combine prediction, explanation, and interactive communication within a single modeling framework. The thesis also discusses limitations related to dataset size, generalizability across populations, and interpretability, and presents several directions for future work, including larger datasets, richer forms of serialization, improved attribution methods, and expanded evaluation in real-world digital health environments.

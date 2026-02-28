@@ -6,15 +6,16 @@
 % AMS = American Mathematical Society; math, symbols, theorems, fonts
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
 
-\usepackage{times}
+%\usepackage{times}
 \usepackage{subcaption}
 \usepackage{latexsym}
 \usepackage{comment}
 \usepackage[ruled,vlined]{algorithm2e}
 \usepackage{bbm}
 \usepackage{multirow}
-\usepackage{colortbl}
-\usepackage{xcolor}
+% \usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage{array}
 
 \usepackage[multiple]{footmisc}
 \usepackage[T1]{fontenc}
@@ -29,12 +30,13 @@
 
 % Header and footer formatting options
 \usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
 
 % Control float placement. [section] = "stop floats at section boundaries is to change the definition of “\section” to include “\FloatBarrier”"
 \usepackage[section]{placeins}
 
 % Hypertext (links) in LaTeX. [option] = remove color and border on links.
-\usepackage[hidelinks]{hyperref}
+% \usepackage[hidelinks]{hyperref}
 
 %\usepackage[all]{xy}
 %\usepackage{mathtools}
@@ -49,7 +51,7 @@
 \usepackage[explicit]{titlesec}
 
 % Standard package for selecting font encodings. [T1] = Support for accented characters
-\usepackage[T1]{fontenc}
+% \usepackage[T1]{fontenc}
 
 % Charter fonts
 \usepackage{charter}
@@ -60,23 +62,24 @@
 \usepackage{tocloft}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
-\usepackage{hyperref}       % hyperlinks
+%\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+%\usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
-\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{longtable}      % tables that break across pages
+%\usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
-\usepackage{xcolor}         % colors
-\usepackage{comment}     
-\usepackage{graphicx}
-\usepackage{amsmath,amssymb,amsfonts}
+%\usepackage{xcolor}         % colors
+%\usepackage{comment}     
+%\usepackage{graphicx}
+%\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
-\usepackage{multirow}
+%\usepackage{multirow}
 \usepackage{caption}
 \usepackage{adjustbox}
-\usepackage{subcaption}
-\usepackage[ruled,vlined]{algorithm2e}
+%\usepackage{subcaption}
+%\usepackage[ruled,vlined]{algorithm2e}
 % Set space between lines. [option] = Double/single spacing necessary for properly formatting ToC/LoFT and titles.
 \usepackage[doublespacing]{setspace}
 
@@ -297,10 +300,6 @@
 
 % Compile Chapter 7
 \input{chapter7}
-\clearpage
-
-% Compile Chapter 8
-\input{chapter8}
 \clearpage
 
 % Compile Appendix

@@ -1,14 +1,253 @@
-\section{Preliminaries} 
-\label{chap:pre}
+\section{Methodology}
 
-\subsection{ICL Formulation}
+\subsection{Study Design and Data Source}
+The dataset used in this study corresponds to the COVID-19 severity assessments collected for this research. Records were collected from patients evaluated through the COVID-19 assessment workflow, and each record contains demographic variables, comorbidities, symptom profiles, and exposure-related information. Only complete assessments with a confirmed severe or non-severe label were included. A total of 393 assessments met these criteria and were used in all analyses. All data were de-identified, and the study protocol followed the ethical guidelines established for the data collection.
 
-Formally, ICL is characterized as a problem involving the conditional generation of text \cite{liu2021makes}, where an LLM $\mathcal{M}$ is employed to generate response $y_Q$ given an optimal task instruction $I$, a demo set $C$, and an input query $x_Q$. $I$ specifies the downstream task that $\mathcal{M}$ should perform, e.g., ``Choose sentiment from positive or negative'' used in our sentiment generation task. $C$ consists of $N$ (e.g., 8) concatenated data-label pairs following a specific template $S$, formally: $C = [S(x_1, y_1);\  \cdots; \ S(x_N, y_N)]$, `;' here denotes the concatenation operator. Thus, given the input prompt as $p = [I;\ C;\ S(x_Q,\_)]$, $\mathcal{M}$ generates the response as $\hat{y}_Q = \mathcal{M}(p)$. $S(x_Q, \_)$ here means using the same template as the demos but with the label empty. 
+\subsection{Dataset Description}
+The dataset used in this study consists of structured COVID-19 clinical assessments containing demographic information, medical history variables, symptom profiles, and exposure-related features. These variables were selected to represent key risk factors associated with clinical deterioration and were aligned with features commonly used in COVID-19 severity stratification literature. The target outcome is a binary classification indicating whether the patient experienced a severe or non-severe clinical course. Severity labels followed the definition established in our prior pediatric COVID-19 study, where outcomes were determined using chart review and thirty-day follow-up surveys \cite{hicks2023saliva}.
 
-\subsection{Adversarial Attack on LLMs}
+The dataset contains the feature groups shown in Table 1, including demographic variables (such as age group and sex), comorbidities (such as diabetes, cardiovascular disease, and chronic lung disease), symptoms (such as fever, dyspnea, chest pain, sore throat, anosmia), and exposure history. All features were converted into binary or categorical encodings consistent with the schema described in the paper. Missing symptom responses were treated as symptom absence to match the data collection format.
 
-In typical text-based adversarial attacks, the attackers manipulate the input $x$ with the goal of misleading the model to produce inaccurate output or bypass safety guardrails \cite{zou2023universal,maus2023black}. Specifically, given the input-output pair $(x,y)$, the attackers aim to learn the adversarial perturbation $\delta$ adding to $x$ by maximizing the model’s objective function but without misleading humans by bounding the perturbation within the “perceptual” region $\Delta$. The objective function of the attacking process thus can be formulated as: 
-\begin{equation}
-    \underset{\delta \in \Delta}{\mathrm{max}}\mathcal{L}(\mathcal{M}(x_Q + \delta), y_Q),
-\end{equation}
-$\mathcal{L}$ here denotes the task-specific loss function, for instance, cross-entropy loss for classification tasks. 
+The 393 assessments were split into training, validation, and test sets following the standard procedure: 70\% training, 10\% validation, and 20\% testing. The same test set was used for evaluating all ML models and all LLM variants to ensure a consistent comparison. These partitions were used to train and evaluate the traditional machine learning models described in Section 3.2 and to provide ground truth comparisons for LLM outputs. The complete list of demographic, comorbidity, symptom, and exposure features used in this study is provided in Table 1, presented below.
+
+Each patient assessment is represented as a binary feature vector
+\[
+S_i = (f_1, f_2, \dots, f_d), \qquad S_i \in \{0,1\}^{d},
+\]
+where each \( f_j \) corresponds to one of the risk factors listed in Table~1.
+
+\begin{longtable}{l r}
+\caption[Binary features used in the study]{Binary features used in the study. The dataset consists of 393 patient records with 15 features representing demographics, clinical symptoms, and social determinants. These features serve as inputs for traditional machine learning models and are also serialized for fine-tuning generative large language models (LLMs).} \label{tab:binary_features} \\
+\toprule
+\textbf{Feature and label} & \textbf{Count, n} \\
+\midrule
+\endfirsthead
+\caption[]{Binary features used in the study (continued)} \\
+\toprule
+\textbf{Feature and label} & \textbf{Count, n} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\textbf{f1. Ages 5 to 11 years} & \\
+\hspace{1em} No  & 294 \\
+\hspace{1em} Yes & 99  \\
+\\
+\textbf{f2. Gender} & \\
+\hspace{1em} Female & 332 \\
+\hspace{1em} Male   & 61  \\
+\\
+\textbf{f3. Hispanic} & \\
+\hspace{1em} No  & 359 \\
+\hspace{1em} Yes & 34  \\
+\\
+\textbf{f4. African American} & \\
+\hspace{1em} No  & 215 \\
+\hspace{1em} Yes & 178 \\
+\\
+\textbf{f5. Service at stores} & \\
+\hspace{1em} Good & 335 \\
+\hspace{1em} Poor & 78  \\
+\\
+\textbf{f6. Insurance} & \\
+\hspace{1em} No  & 387 \\
+\hspace{1em} Yes & 6   \\
+\\
+\textbf{f7. Headache} & \\
+\hspace{1em} No  & 332 \\
+\hspace{1em} Yes & 61  \\
+\\
+\textbf{f8. Fever} & \\
+\hspace{1em} No  & 211 \\
+\hspace{1em} Yes & 182 \\
+\\
+\textbf{f9. Cough} & \\
+\hspace{1em} No  & 210 \\
+\hspace{1em} Yes & 183 \\
+\\
+\textbf{f10. Shortness of breath} & \\
+\hspace{1em} No  & 292 \\
+\hspace{1em} Yes & 101 \\
+\\
+\textbf{f11. Exposed to COVID-19 individuals} & \\
+\hspace{1em} No  & 343 \\
+\hspace{1em} Yes & 50  \\
+\\
+\textbf{f12. Nausea or vomiting} & \\
+\hspace{1em} No  & 272 \\
+\hspace{1em} Yes & 121 \\
+\\
+\textbf{f13. Lungs check} & \\
+\hspace{1em} Bad  & 317 \\
+\hspace{1em} Good & 76  \\
+\\
+\textbf{f14. Eye redness} & \\
+\hspace{1em} No  & 381 \\
+\hspace{1em} Yes & 12  \\
+\\
+\textbf{f15. COVID-19 antibody test} & \\
+\hspace{1em} Negative & 364 \\
+\hspace{1em} Positive & 29  \\
+\\
+\textbf{f16. Outcome (severity)} & \\
+\hspace{1em} No  & 284 \\
+\hspace{1em} Yes & 109 \\
+\end{longtable}
+
+\subsection{Machine Learning Baselines}
+To benchmark the LLM-based system against traditional approaches, three supervised machine learning classifiers were implemented: logistic regression, random forest, and XGBoost. These methods were chosen because they represent widely used baselines for structured clinical prediction tasks and provide a comparison point for evaluating the utility of generative LLMs in risk stratification.
+
+Model training followed the procedures described in the paper, using the same dataset partitions and ensuring that each model received the same structured feature inputs as the LLM. Hyperparameters were tuned using grid search on the validation partition. Performance was evaluated on the held-out test set using accuracy, precision, recall, F1-score, and AUC, matching the evaluation criteria reported in the original study. We used Shapley additive explanations (SHAP) to interpret XGBoost predictions, following the unified framework proposed by Lundberg and Lee \cite{lundberg2017unified}.
+
+These ML models serve as reference points to contextualize the performance of the LLM-based approach described below. Because the severe class was underrepresented, stratified splitting was used to preserve class proportions across the train, validation, and test partitions.
+
+\subsection{LLM-Based Risk Assessment Framework}
+The LLM-based method transforms the COVID-19 risk assessment task into a generative prediction problem by serializing structured patient information into a natural-language prompt and submitting it to a large language model for inference. The end-to-end workflow is illustrated in Figure~\ref{fig:workflow}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/fig2.png}
+    \caption{Workflow for few-shot COVID-19 severity risk assessment using generative large language models (LLMs) with different serialization techniques. The top section, labeled "Backend - system developer," shows the fine-tuning phase where a few-shot sample of patient data, serialized through list and text templates, is used to fine-tune the LLMs. This backend process includes the creation of prompts and corresponding labels for model fine-tuning. The bottom section, labeled "Frontend - user," illustrates how a conversational chatbot interacts with users through our application to gather responses through streaming QA interactions. These responses are analyzed by the fine-tuned LLM in real time, providing risk assessments and highlighting the top attributing features that explain the model’s risk assessment. QA: question-and-answer.}
+    \label{fig:workflow}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/fig9.png}
+    \caption{Overview of our mobile app design, showcasing patient data collection, real-time risk assessment using large language models (LLMs), and clinician review interface.}
+    \label{fig:interface_views}
+\end{figure}
+
+\subsubsection{Conversational Assessment Flow}
+The system uses an interactive question–answer workflow in which the application presents a sequence of clinically relevant questions to the user. These include demographic questions, medical history items, exposures, and symptom queries. Each user response updates an internal structured representation of the assessment. An example of the assessment question–answer interface used to collect user responses is shown in Figure~\ref{fig:interface_views} (Assessment View).
+
+This conversational design ensures that all necessary risk factors are collected while allowing users to respond naturally. The assessment uses a structured sequence of predefined questions, and the LLM generates risk predictions and explanations based on the collected information.
+
+An example of the assessment question–answer interface used to collect user inputs is shown in Figure~\ref{fig:interface_views} (Assessment View).
+
+\subsubsection{Serialization of Structured Features}
+Once the assessment is complete, the structured variables are serialized into a textual format that the LLM can interpret. The serialization template mirrors the one described in the paper and encodes each variable as a labeled key–value pair (e.g., “Age group: 40–49”, “Has diabetes: No”, “Experiencing shortness of breath: Yes”). This ensures that the model receives a deterministic representation of the patient profile.
+
+The serialized prompt instructs the LLM to output:
+\begin{itemize}
+    \item A numerical probability indicating risk of severe COVID-19
+    \item A natural-language explanation summarizing the contributing factors
+\end{itemize}
+We fine-tuned the base LLMs on a small labeled dataset of serialized assessments using both list-style and text-style templates. At inference time, the patient's serialized feature vector is formatted using the same template and submitted to the fine-tuned LLM to obtain a risk probability and explanation.
+
+Two serialization formats were used, consistent with our pipeline:
+\begin{itemize}
+    \item \textbf{List serialization (-L):} Each feature is represented as a bullet-point-style entry, e.g., ``$\bullet$ Age group: 40-49; $\bullet$ Diabetes: No; $\bullet$ Fever: Yes.''
+    \item \textbf{Text serialization (-T):} Feature--value pairs are integrated into a paragraph-style textual description.
+\end{itemize}
+Both formats were used for fine-tuning and evaluation, and later performance comparisons (Chapter 4) distinguish results for the two serialization types.
+
+\subsubsection{Model Training Configuration}
+Consistent with our pipeline, we fine-tuned multiple LLMs on serialized assessments. The models included T0pp, Flan-T5-XL, and BioMedLM variants. Training was performed using low-rank adaptation (LoRA) to reduce memory usage. Each model was fine-tuned separately using both list-style and text-style serialized datasets. The fine-tuning dataset consisted of the 393 assessments, and training was run for a small number of epochs with a learning rate in the range reported in the original study. Evaluation was performed on the same held-out test set used for the ML baselines.
+
+\subsubsection{Prompt Template and Output Format}
+The prompt includes an instruction block followed by the serialized features. The instruction clarifies the task (risk estimation), the expected output format (probability followed by explanation), and constraints preventing the model from offering diagnostic guidance.
+
+The LLM returns a probability score and a rationale that describes the dominant features influencing the output. These outputs are parsed and prepared for downstream display in the user interface.
+
+\subsubsection{Probability Computation and Decision Rule}
+For each serialized input \( S_i \), the fine-tuned LLM outputs logits corresponding to the \texttt{yes} and \texttt{no} classes. The probability of a severe outcome is computed using the binary softmax function:
+\[
+p(\text{yes} \mid S_i) = 
+\frac{e^{\text{logits}_{\text{yes}}}}
+{e^{\text{logits}_{\text{yes}}} + e^{\text{logits}_{\text{no}}}}.
+\]
+
+The final binary prediction is obtained using a threshold of 0.5:
+\[
+\hat{y}_i =
+\begin{cases}
+1, & \text{if } p(\text{yes} \mid S_i) > 0.5, \\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+\subsubsection{Risk Interpretation and Display}
+Predicted probabilities are mapped into categorical risk levels following the thresholds established in the study design:
+\begin{itemize}
+    \item \textbf{Low risk:} \( p < 0.33 \)
+    \item \textbf{Moderate risk:} \( 0.33 \leq p < 0.67 \)
+    \item \textbf{High risk:} \( p \geq 0.67 \)
+\end{itemize}
+These categories are displayed in both the Patient interface and Clinician interface. Explanations are also displayed to enhance interpretability and transparency, accompanying the numerical score on both the patient and clinician interface pages.
+
+\subsection{Explainability Method}
+Attention weights were extracted from the model output and visualized as a heatmap to highlight which serialized features contributed most to the prediction. The visualization method corresponds to Figure~\ref{fig:heatmap}.
+
+The aggregated attention scores are visualized as a heatmap, matching Figure~\ref{fig:heatmap}, and presented alongside the LLM output to provide users with interpretable insights into model reasoning.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/fig4.png}
+    \caption{The attention map for a predicted positive case where the darker color represents larger attention weights for each token. The prompts are tokenized to mimic the actual inputs to the large language models (LLMs).}
+    \label{fig:heatmap}
+\end{figure}
+
+\subsection{System Architecture and Implementation}
+The mobile app integrates LLM inference, serialized assessment logic, and database storage. The full system architecture is depicted in Figure~\ref{fig:architecture}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/fig5.png}
+    \caption{Data flow diagram where we map out the flow of information between different processes of large language model (LLM) backend, Firebase, and mobile app interfaces for both patient and clinician.}
+    \label{fig:architecture}
+\end{figure}
+
+\subsubsection{Backend Architecture}
+The backend consists of:
+\begin{itemize}
+    \item A cloud-based LLM inference service
+    \item Firebase for data storage and retrieval
+    \item Secure API endpoints connecting the app and backend
+\end{itemize}
+The architecture supports real-time communication between the mobile frontend and the LLM backend.
+
+The mobile app was implemented using Flutter, and the backend inference service was deployed using Python and FastAPI. All communication between the app, backend server, and Firebase database occurs over encrypted HTTPS connections. The LLM inference server is containerized and hosted on a secure cloud instance as described in the system documentation.
+
+\subsubsection{User Interface Design}
+The mobile application presents three primary user interface views that guide the assessment and result interpretation. Figure~\ref{fig:interface_views} illustrates the Assessment view, Patient view, and Clinician view screens. These interfaces support structured data collection, display risk summaries, and provide explanation text generated by the model. The Assessment view collects demographic, exposure, and symptom inputs, while the Patient and Clinician views present the predicted risk and key explanatory factors. These UI components ensure clarity and usability during the self-assessment process.
+
+\subsubsection{App Interface Workflows}
+The layouts of the Assessment view, Patient view, and Clinician view are illustrated in Figure~\ref{fig:interface_views}, which displays the corresponding user interface screens.
+
+The workflows for the assessment page and the results pages are shown in Figures~\ref{fig:assessment_flow} and \ref{fig:results_flow}.
+
+Figure~\ref{fig:assessment_flow} presents the sequence of operations through which user inputs are collected, serialized, submitted to the backend, and displayed.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/fig6.png}
+    \caption{Sequence diagram for the Assessment page, where the patient takes the risk assessment and the large language model (LLM) backend calculates the results, which will be saved to the Firebase. QA: question-and-answer.}
+    \label{fig:assessment_flow}
+\end{figure}
+
+Figure~\ref{fig:results_flow} shows how users and clinicians retrieve stored assessments and explanations.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{fig/fig7.png}
+    \caption{Sequence diagram for displaying patients’ session results. As shown, each patient has access to all their own sessions while the clinician can access all patients’ sessions.}
+    \label{fig:results_flow}
+\end{figure}
+
+These workflows ensure structured, consistent interaction and traceability of assessments.
+
+\subsubsection{Security and Data Handling}
+The system does not store any personally identifiable information. All communication is encrypted, and data stored in Firebase consists exclusively of encoded assessment results. No data is reused for training.
+
+\subsection{Evaluation Setup}
+Evaluation consisted of:
+\begin{itemize}
+    \item Comparing LLM predictions with ML baselines
+    \item Assessing explanation consistency
+\end{itemize}
+The LLM predictions were evaluated using the structured test set, where serialized patient profiles were submitted to the LLM and predictions were compared with ground truth labels. The evaluation mirrors the methodology described in the original paper.
+
+All LLM evaluations used deterministic decoding with temperature = 0 to eliminate sampling variance. This ensures that repeated evaluations of the same serialized input yield identical outputs.
+
+All evaluations used the same partitions and criteria as described in the paper.
