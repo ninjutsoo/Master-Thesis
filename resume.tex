@@ -1,0 +1,286 @@
+%-------------------------
+% Resume in Latex
+% !TEX root = resume.tex
+% !TEX program = pdflatex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \textbf{\Huge \scshape Mohammad Amin Roshani} \\ \vspace{1pt}
+    \small USA $|$ Tel: +1 9015654839 $|$ \href{mailto:hq6375@wayne.edu}{\underline{hq6375@wayne.edu}} \\
+    \href{https://scholar.google.com/citations?user=grZF56sAAAAJ\&hl=en}{\underline{Scholar}} $|$
+    \href{https://www.linkedin.com/in/mohammad-amin-roshani/}{\underline{LinkedIn}} $|$
+    \href{https://github.com/ninjutsoo}{\underline{GitHub}}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Wayne State University}{2023 -- Present}
+      {Ph.D. in Computer Science}{}
+    \resumeSubheading
+      {Wayne State University}{2023 -- 2025}
+      {M.S. in Computer Science}{}
+    \resumeSubheading
+      {The University of Memphis}{2022 -- 2023}
+      {Ph.D. studies in Computer Science (transferred to Wayne State)}{GPA: 3.94}
+    \resumeSubheading
+      {The University of Tehran}{2017 -- 2022}
+      {B.Sc. in Computer Science}{GPA: 3.1}
+    \resumeSubheading
+      {National Organization for Development of Exceptional Talents}{2013 -- 2017}
+      {Mathematics High School Diploma}{GPA: 4.0}
+  \resumeSubHeadingListEnd
+
+
+%-----------INTERESTS-----------
+\section{Interests}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     Health Informatics, Machine Learning, Natural Language Processing, Data Analysis
+    }}
+  \end{itemize}
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Graduate Teaching Assistant}{Aug 2025 -- May 2026}
+      {Wayne State University}{}
+      \resumeItemListStart
+        \resumeItem{Problem Solving and Programming -- Hadi Nasser}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Graduate Teaching Assistant}{Aug 2024 -- May 2025}
+      {Wayne State University}{}
+      \resumeItemListStart
+        \resumeItem{Introduction to Web Technology -- Kamel Rushaidat}
+        \resumeItem{Senior Capstone Project -- Seyed Ziae Mousavi Mojab}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Graduate Research Assistant}{May 2023 -- Aug 2024}
+      {Wayne State University}{Supervisor: \href{mailto:dzhu@wayne.edu}{Dongxiao Zhu}}
+      \resumeItemListStart
+        \resumeItem{Working on NIH project about using LLMs to build a conversational app to predict COVID-19 severity risk}
+        \resumeItem{Conducting research on safety of LLMs and multimodal foundational models}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Graduate Teaching Assistant}{Aug 2022 -- Apr 2023}
+      {The University of Memphis}{}
+      \resumeItemListStart
+        \resumeItem{CS1: Introduction to Programming (Python) -- William Baggett}
+        \resumeItem{Foundations of Computing -- Thomas Watson}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Private Tutor}{Feb 2020 -- Aug 2022}
+      {Self-Employed}{}
+      \resumeItemListStart
+        \resumeItem{Teaching Introduction to Python to students in Iran and Australia}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Teaching Assistant}{Jan 2020 -- Jan 2022}
+      {The University of Tehran}{}
+      \resumeItemListStart
+        \resumeItem{Advanced Information Retrieval (NLP) -- Hamidreza Keshavarz}
+        \resumeItem{Fundamentals of Computer Science and Programming -- Deniz Tahmouresi}
+        \resumeItem{Machine Language and Assembly -- Abbas Nowzari-Dalini}
+        \resumeItem{Principles of Computer Systems -- Bagher BabaAli}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-----------PUBLICATIONS-----------
+\section{Publications}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {\href{https://arxiv.org/abs/2505.03392}{Automatic Calibration for Membership Inference Attack on Large Language Models}}{Jul 2025}
+      {Published}{}
+    \resumeSubheading
+      {\parbox[t]{0.72\textwidth}{\href{https://ai.jmir.org/2025/1/e67363/}{Generative Large Language Model--Powered Conversational AI App for Personalized Risk Assessment: Case Study in COVID-19}}}{Feb 2025}
+      {Published}{}
+    \resumeSubheading
+      {\href{https://arxiv.org/abs/2402.13459}{Learning to poison large language models during instruction tuning}}{Feb 2024}
+      {Under Review}{}
+  \resumeSubHeadingListEnd
+
+
+%-----------LANGUAGES-----------
+\section{Languages}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     English (Fluent; TOEFL 106, GRE V 152), Persian (Native), Arabic (Elementary)
+    }}
+  \end{itemize}
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \resumeSubHeadingListStart
+    \resumeProjectHeading
+      {\textbf{AI-powered web application for elderly health tracking (collaboration with nursing school)}}{Dec 2025}
+    \resumeProjectHeading
+      {\textbf{Adding LLMs to the risk assessment app to make a conversational agent}}{Mar 2024}
+    \resumeProjectHeading
+      {\textbf{Designing COVID-19 risk severity assessment for NIH project}}{Oct 2023}
+    \resumeProjectHeading
+      {\textbf{Hate speech detection using Transfer Learning}}{Oct 2022}
+    \resumeProjectHeading
+      {\parbox[t]{0.72\textwidth}{\textbf{Additional:} Sarcasm detection, sentiment analysis, segmentation, Bi-LSTM hate speech, regression/statistics}}{2021--2022}
+  \resumeSubHeadingListEnd
+
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages}{:} Python (primary), C++, JavaScript, Go, R, SQL, Bash, HTML, CSS, \LaTeX \\
+     \textbf{Machine Learning \& AI}{:} Deep Learning, LLMs, Transformers, RAG, LoRA, prompt engineering, multi-agent AI, XAI, clinical NLP \\
+     \textbf{ML Frameworks \& Libraries}{:} PyTorch, Hugging Face, Scikit-learn, NumPy, Pandas, TensorFlow, OpenCV, Matplotlib, NLTK \\
+     \textbf{NLP}{:} BERT, GPT-style, LLaMA, tokenization, instruction fine-tuning, information extraction from clinical text \\
+     \textbf{Web \& Application Development}{:} React, Node.js, JavaScript, REST APIs, web and mobile-connected apps \\
+     \textbf{Data Science \& Modeling}{:} Statistical modeling, regression, classification, experimental design, AUC/F1/precision-recall \\
+     \textbf{Tools \& Infrastructure}{:} Git, Linux/Ubuntu, VS Code, GPU pipelines, Hugging Face ecosystem, shell scripting \\
+     \textbf{Research \& Writing}{:} LaTeX, reproducible experiments, dataset construction, peer review
+    }}
+  \end{itemize}
+
+
+%-----------HONORS-----------
+\section{Honors}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     Admitted to the second level of the National Student Olympiad (Mathematics and Literature) \\
+     Top 5 of the class for the last four semesters \\
+     First place in University Dart Competitions
+    }}
+  \end{itemize}
+
+
+%-----------REFERENCES-----------
+\section{References}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{Available upon request.}}
+  \end{itemize}
+
+
+%-------------------------------------------
+\end{document}

@@ -1,0 +1,5 @@
+# Instructor-only challenge verifier (reference solution — do not ship to students)
+AgenticChallenge/_instructor_only/
+
+# API keys and local env (never commit)
+.env

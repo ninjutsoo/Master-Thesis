@@ -54,23 +54,7 @@
             "env": {}
         }
     ],
-    "latex-workshop.view.pdf.viewer": "external",
-    "latex-workshop.view.pdf.external.viewer.command": "C:\\Users\\mrosh\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe",
-    "latex-workshop.view.pdf.external.viewer.args": [
-        "-reuse-instance",
-        "-inverse-search",
-        "\"C:\\Users\\mrosh\\AppData\\Local\\Programs\\cursor\\Cursor.exe\" -g \"%f:%l\"",
-        "%PDF%"
-    ],
-    "latex-workshop.view.pdf.external.synctex.command": "C:\\Users\\mrosh\\AppData\\Local\\SumatraPDF\\SumatraPDF.exe",
-    "latex-workshop.view.pdf.external.synctex.args": [
-        "-reuse-instance",
-        "-forward-search",
-        "%TEX%",
-        "%LINE%",
-        "%PDF%"
-    ],
-    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.synctex.afterBuild.enabled": true,
     "latex-workshop.latex.clean.fileTypes": [
         "*.aux",
